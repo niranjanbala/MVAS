@@ -1,0 +1,74 @@
+package com.coextrix.mvas.service.cropimage;
+
+import java.util.Iterator;
+import java.util.List;
+
+import com.coextrix.mvas.model.FrameImage;
+
+/*
+ * TODO cropImages() thread service has a busy wait while loop.This about an alternative
+ */
+public class ImageCropper {
+
+	public void cropImages(final List<FrameImage> frameImages,long totalCropImages) {
+		long currentCount = 0;
+		final Iterator<FrameImage> frameImagesIter = frameImages.iterator();
+		
+		int currentThread = 1;
+		long imagesPerThread = totalCropImages / 6;
+		final CropImageThread cropImageThread1 = new CropImageThread();
+		final CropImageThread cropImageThread2 = new CropImageThread();
+		final CropImageThread cropImageThread3 = new CropImageThread();
+		final CropImageThread cropImageThread4 = new CropImageThread();
+		final CropImageThread cropImageThread5 = new CropImageThread();
+		final CropImageThread cropImageThread6 = new CropImageThread();
+		
+		FrameImage frameImage;
+		while (frameImagesIter.hasNext()) {
+			frameImage = frameImagesIter.next();
+			if (isCurrentThreadThreshHold(currentCount, frameImage
+					.getCropImages().size(), imagesPerThread, currentThread)) {
+				currentCount += frameImage.getCropImages().size();
+			} else {
+				currentThread++;
+				currentCount = frameImage.getCropImages().size();
+			}
+			switch (currentThread) {
+			case 1:
+				cropImageThread1.getFrameImages().add(frameImage);
+				break;
+			case 2:
+				cropImageThread2.getFrameImages().add(frameImage);
+				break;
+			case 3:
+				cropImageThread3.getFrameImages().add(frameImage);
+				break;
+			case 4:
+				cropImageThread4.getFrameImages().add(frameImage);
+				break;
+			case 5:
+				cropImageThread5.getFrameImages().add(frameImage);
+				break;
+			case 6:
+				cropImageThread6.getFrameImages().add(frameImage);
+				break;
+			default:
+				break;
+			}
+		}
+		cropImageThread1.cropImage();
+		cropImageThread2.cropImage();
+		cropImageThread3.cropImage();
+		cropImageThread4.cropImage();
+		cropImageThread5.cropImage();
+		cropImageThread6.cropImage();
+	}
+
+	private static boolean isCurrentThreadThreshHold(final long currentCount,
+			final long cropImagesNo, final long imagesPerThread,
+			final int currentThread) {
+		return currentCount == 0
+				|| imagesPerThread >= currentCount + cropImagesNo
+				|| currentThread == 6;
+	}
+}

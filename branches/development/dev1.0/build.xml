@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project MVAS-ImageCropping">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="E:/ws_di/MVAS-ImageCropping/imageCropping.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Main-Class" value="com.coextrix.mvas.service.cropimage.CropImageService"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="E:/ws_di/MVAS-ImageCropping/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="E:/ws_di/MVAS-ImageCropping/lib/sqlitejdbc-v056.jar"/>
+        </jar>
+    </target>
+</project>
