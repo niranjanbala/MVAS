@@ -6,7 +6,6 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
@@ -22,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.ImageIcon;
@@ -100,10 +98,10 @@ public class CropImageThread implements Runnable {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	private static BufferedImage toBufferedImage(final String sourceFilePath)
+	private BufferedImage toBufferedImage(final String sourceFilePath)
 			throws FileNotFoundException, IOException {
-		ImageReader reader = ImageIO.getImageReadersByFormatName("JPEG").next();
-		ImageInputStream iis = ImageIO
+		final ImageReader reader = ImageIO.getImageReadersByFormatName("JPEG").next();
+		final ImageInputStream iis = ImageIO
 				.createImageInputStream(new FileInputStream(sourceFilePath));
 		reader.setInput(iis);
 		// System.out.println("width = " + reader.getWidth(0));
@@ -114,7 +112,7 @@ public class CropImageThread implements Runnable {
 		return reader.read(0);
 	}
 
-	private static BufferedImage toBufferedImage(final Image image) {
+	private BufferedImage toBufferedImage(final Image image) {
 		if (image instanceof BufferedImage) {
 			return (BufferedImage) image;
 		}
@@ -163,7 +161,7 @@ public class CropImageThread implements Runnable {
 	}
 
 	// This method returns true if the specified image has transparent pixels
-	private static boolean hasAlpha(final Image image) {
+	private boolean hasAlpha(final Image image) {
 		// If buffered image, the color model is readily available
 		if (image instanceof BufferedImage) {
 			final BufferedImage bimage = (BufferedImage) image;
