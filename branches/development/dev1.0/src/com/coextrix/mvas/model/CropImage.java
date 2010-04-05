@@ -9,28 +9,32 @@ import java.io.Serializable;
 public class CropImage implements Serializable {
 
 	private static final long serialVersionUID = 4247982568836891828L;
-	public static int currentNo;
-	private String targetFileDir;
+	public static long totalCropImages;
+	public static long currentNo;
 	private long id;
+	private long particleId;
 	private int x;
 	private int y;
 	private int w;
 	private int h;
-	private long particleId;
 
 	/**
-	 * @return the targetFileDir
+	 * @param id
+	 * @param particleId
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * 
 	 */
-	public String getTargetFileDir() {
-		return targetFileDir;
-	}
-
-	/**
-	 * @param targetFileDir
-	 *            the targetFileDir to set
-	 */
-	public void setTargetFileDir(String targetFileDir) {
-		this.targetFileDir = targetFileDir;
+	public CropImage(long id, long particleId, int x, int y, int w, int h) {
+		super();
+		this.id = id;
+		this.particleId = particleId;
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
 	}
 
 	/**
@@ -44,7 +48,7 @@ public class CropImage implements Serializable {
 	 * @param x
 	 *            the x to set
 	 */
-	public void setX(int x) {
+	public void setX(final int x) {
 		this.x = x;
 	}
 
@@ -59,7 +63,7 @@ public class CropImage implements Serializable {
 	 * @param y
 	 *            the y to set
 	 */
-	public void setY(int y) {
+	public void setY(final int y) {
 		this.y = y;
 	}
 
@@ -74,7 +78,7 @@ public class CropImage implements Serializable {
 	 * @param w
 	 *            the w to set
 	 */
-	public void setW(int w) {
+	public void setW(final int w) {
 		this.w = w;
 	}
 
@@ -89,22 +93,8 @@ public class CropImage implements Serializable {
 	 * @param h
 	 *            the h to set
 	 */
-	public void setH(int h) {
+	public void setH(final int h) {
 		this.h = h;
-	}
-
-	/**
-	 * @return the currentNo
-	 */
-	public static int getCurrentNo() {
-		return currentNo;
-	}
-
-	/**
-	 * @param currentNo the currentNo to set
-	 */
-	public static void setCurrentNo(int currentNo) {
-		CropImage.currentNo = currentNo;
 	}
 
 	/**
@@ -115,9 +105,10 @@ public class CropImage implements Serializable {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
-	public void setId(long id) {
+	public void setId(final long id) {
 		this.id = id;
 	}
 
@@ -125,8 +116,8 @@ public class CropImage implements Serializable {
 		return particleId;
 	}
 
-	public void setParticleId(long particleId) {
+	public void setParticleId(final long particleId) {
 		this.particleId = particleId;
 	}
-	
+
 }

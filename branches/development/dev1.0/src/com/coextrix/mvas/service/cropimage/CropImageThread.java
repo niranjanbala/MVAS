@@ -6,11 +6,13 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.PixelGrabber;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,6 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReadParam;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.ImageIcon;
 
 import com.coextrix.mvas.model.CropImage;
@@ -27,12 +32,20 @@ import com.coextrix.mvas.model.FrameImage;
 
 public class CropImageThread implements Runnable {
 
-	public CropImageThread() {
+	private final CropInfo cropInfo;
+	private List<FrameImage> frameImages;
+	private final long unitCropImages;
+	private String outDirectory;
+	public static int completionPercentage;
+
+	public CropImageThread(final CropInfo cropInfo) {
 		super();
 		this.frameImages = new ArrayList<FrameImage>();
+		this.cropInfo = cropInfo;
+		this.unitCropImages = CropImage.totalCropImages / 100;
+		this.outDirectory = cropInfo.getProjectCacheDir() + "\\"
+				+ cropInfo.getProjectTitle() + "-Thumbnails\\";
 	}
-
-	private List<FrameImage> frameImages;
 
 	@Override
 	public void run() {
@@ -51,42 +64,71 @@ public class CropImageThread implements Runnable {
 		}
 	}
 
-	private  void cropImage(final FrameImage frameImage)throws FileNotFoundException, IOException, SQLException {
-		final Image image = new ImageIcon(frameImage.getSourceFolder() + "\\"
-				+ frameImage.getSourceFileName()).getImage();
-		final BufferedImage bufferedImage = toBufferedImage(image);
+	private void cropImage(final FrameImage frameImage)
+			throws FileNotFoundException, IOException, SQLException {
+		//final Image image = new ImageIcon(frameImage.getSourceFilePath()).getImage();
+		//final BufferedImage bufferedImage = toBufferedImage(image);
+		final BufferedImage bufferedImage = toBufferedImage(frameImage.getSourceFilePath());
 		BufferedImage cropImg;
 		File tempFile;
 		OutputStream tmpOutputStream;
-		int i = 0;
 		for (CropImage cropImage : frameImage.getCropImages()) {
-			CropImage.currentNo++;
-			i++;
 			cropImg = bufferedImage.getSubimage(cropImage.getX(), cropImage
 					.getY(), cropImage.getW(), cropImage.getH());
-			tempFile = new File(frameImage.getTargetFolder() + "\\"
-					+ cropImage.getTargetFileDir()+ cropImage.getParticleId()+".jpg");
+			tempFile = new File(outDirectory + cropImage.getParticleId()
+					+ ".jpg");
 			tmpOutputStream = new FileOutputStream(tempFile);
-			ImageIO.write(cropImg, frameImage.getFormatName(), tempFile);
+			ImageIO.write(cropImg, "jpg", tempFile);
 			tmpOutputStream.close();
+			CropImage.currentNo++;
+			if (CropImage.currentNo == unitCropImages
+					* (completionPercentage + 1)) {
+				completionPercentage++;
+				System.out.println("Native process: Cropping in progress,"
+						+ CropImage.currentNo + "," + CropImage.totalCropImages
+						+ "," + completionPercentage);
+			}
 		}
 	}
 
-	private  static BufferedImage toBufferedImage(final Image image) {
+	/**
+	 * Returns BufferedImage by reading part of a JPEG from the disk
+	 * Memory Efficient Jpeg Crop
+	 * 
+	 * @param sourceFilePath
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	private static BufferedImage toBufferedImage(final String sourceFilePath)
+			throws FileNotFoundException, IOException {
+		ImageReader reader = ImageIO.getImageReadersByFormatName("JPEG").next();
+		ImageInputStream iis = ImageIO
+				.createImageInputStream(new FileInputStream(sourceFilePath));
+		reader.setInput(iis);
+		// System.out.println("width = " + reader.getWidth(0));
+		// System.out.println("height = " + reader.getHeight(0));
+		// ImageReadParam param = reader.getDefaultReadParam();
+		// param.setSourceRegion(new Rectangle(100, 100, 100, 100));
+		//return reader.read(0, param);
+		return reader.read(0);
+	}
+
+	private static BufferedImage toBufferedImage(final Image image) {
 		if (image instanceof BufferedImage) {
 			return (BufferedImage) image;
 		}
 		// This code ensures that all the pixels in the image are loaded
-		Image imageIcon = new ImageIcon(image).getImage();
+		final Image imageIcon = new ImageIcon(image).getImage();
 		// Determine if the image has transparent pixels; for this method's
 		// implementation, see e661 Determining If an Image Has Transparent
 		// Pixels
-		boolean hasAlpha = hasAlpha(imageIcon);
+		final boolean hasAlpha = hasAlpha(imageIcon);
 		// boolean hasAlpha = false;
 		// Create a buffered image with a format that's compatible with the
 		// screen
 		BufferedImage bimage = null;
-		GraphicsEnvironment gEnv = GraphicsEnvironment
+		final GraphicsEnvironment gEnv = GraphicsEnvironment
 				.getLocalGraphicsEnvironment();
 		try {
 			// Determine the type of transparency of the new buffered image
@@ -95,8 +137,9 @@ public class CropImageThread implements Runnable {
 				transparency = Transparency.BITMASK;
 			}
 			// Create the buffered image
-			GraphicsDevice gDevice = gEnv.getDefaultScreenDevice();
-			GraphicsConfiguration gConfig = gDevice.getDefaultConfiguration();
+			final GraphicsDevice gDevice = gEnv.getDefaultScreenDevice();
+			final GraphicsConfiguration gConfig = gDevice
+					.getDefaultConfiguration();
 			bimage = gConfig.createCompatibleImage(imageIcon.getWidth(null),
 					imageIcon.getHeight(null), transparency);
 		} catch (HeadlessException e) {
@@ -112,7 +155,7 @@ public class CropImageThread implements Runnable {
 					.getHeight(null), type);
 		}
 		// Copy image to buffered image
-		Graphics graphics = bimage.createGraphics();
+		final Graphics graphics = bimage.createGraphics();
 		// Paint the image onto the buffered image
 		graphics.drawImage(imageIcon, 0, 0, null);
 		graphics.dispose();
@@ -120,24 +163,25 @@ public class CropImageThread implements Runnable {
 	}
 
 	// This method returns true if the specified image has transparent pixels
-	private  static boolean hasAlpha(final Image image) {
+	private static boolean hasAlpha(final Image image) {
 		// If buffered image, the color model is readily available
 		if (image instanceof BufferedImage) {
-			BufferedImage bimage = (BufferedImage) image;
+			final BufferedImage bimage = (BufferedImage) image;
 			return bimage.getColorModel().hasAlpha();
 		}
 		// Use a pixel grabber to retrieve the image's color model;
 		// grabbing a single pixel is usually sufficient
-		PixelGrabber pixelGrabber = new PixelGrabber(image, 0, 0, 1, 1, false);
+		final PixelGrabber pixelGrabber = new PixelGrabber(image, 0, 0, 1, 1,
+				false);
 		try {
 			pixelGrabber.grabPixels();
 		} catch (InterruptedException e) {
 		}
 		// Get the image's color model
-		ColorModel colorModel = pixelGrabber.getColorModel();
+		final ColorModel colorModel = pixelGrabber.getColorModel();
 		return colorModel.hasAlpha();
 	}
-	
+
 	public void cropImage() {
 		Runnable thread = new Thread(this);
 		thread.run();
@@ -156,6 +200,13 @@ public class CropImageThread implements Runnable {
 	 */
 	public void setFrameImages(final List<FrameImage> frameImages) {
 		this.frameImages = frameImages;
+	}
+
+	/**
+	 * @return the cropInfo
+	 */
+	public CropInfo getCropInfo() {
+		return cropInfo;
 	}
 
 }

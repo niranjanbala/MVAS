@@ -3,6 +3,7 @@ package com.coextrix.mvas.service.cropimage;
 import java.util.Iterator;
 import java.util.List;
 
+import com.coextrix.mvas.model.CropImage;
 import com.coextrix.mvas.model.FrameImage;
 
 /*
@@ -10,19 +11,20 @@ import com.coextrix.mvas.model.FrameImage;
  */
 public class ImageCropper {
 
-	public void cropImages(final List<FrameImage> frameImages,long totalCropImages) {
+	public void cropImages(final List<FrameImage> frameImages,
+			final CropInfo cropInfo) {
 		long currentCount = 0;
 		final Iterator<FrameImage> frameImagesIter = frameImages.iterator();
-		
+
 		int currentThread = 1;
-		long imagesPerThread = totalCropImages / 6;
-		final CropImageThread cropImageThread1 = new CropImageThread();
-		final CropImageThread cropImageThread2 = new CropImageThread();
-		final CropImageThread cropImageThread3 = new CropImageThread();
-		final CropImageThread cropImageThread4 = new CropImageThread();
-		final CropImageThread cropImageThread5 = new CropImageThread();
-		final CropImageThread cropImageThread6 = new CropImageThread();
-		
+		final long imagesPerThread = CropImage.totalCropImages / 6;
+		final CropImageThread cropImageThread1 = new CropImageThread(cropInfo);
+		final CropImageThread cropImageThread2 = new CropImageThread(cropInfo);
+		final CropImageThread cropImageThread3 = new CropImageThread(cropInfo);
+		final CropImageThread cropImageThread4 = new CropImageThread(cropInfo);
+		final CropImageThread cropImageThread5 = new CropImageThread(cropInfo);
+		final CropImageThread cropImageThread6 = new CropImageThread(cropInfo);
+
 		FrameImage frameImage;
 		while (frameImagesIter.hasNext()) {
 			frameImage = frameImagesIter.next();

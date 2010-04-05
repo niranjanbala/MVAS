@@ -4,14 +4,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DataSourceUtil {
+public final class DataSourceUtil {
+
+	private DataSourceUtil() {
+		super();
+	}
 
 	public static Connection getHSQLConnection() throws ClassNotFoundException,
 			SQLException {
 		String driver = "org.hsqldb.jdbcDriver";
 		String url = "jdbc:hsqldb:data/tutorial";
 		Class.forName(driver);
-		System.out.println("Driver Loaded.");
 		return DriverManager.getConnection(url, "sa", "");
 	}
 
@@ -21,7 +24,6 @@ public class DataSourceUtil {
 		String url = "jdbc:mysql://localhost/demo2s";
 		String username = "root";
 		String password = "root";
-
 		Class.forName(driver);
 		return DriverManager.getConnection(url, username, password);
 	}
@@ -40,7 +42,6 @@ public class DataSourceUtil {
 		String url = "jdbc:oracle:thin:@localhost:1521:databaseName";
 		String username = "userName";
 		String password = "password";
-
 		Class.forName(driver); // load Oracle driver
 		return DriverManager.getConnection(url, username, password);
 	}

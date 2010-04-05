@@ -1,6 +1,7 @@
 package com.coextrix.mvas.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,11 +12,13 @@ public class FrameImage implements Serializable {
 
 	private static final long serialVersionUID = -9179284031811051227L;
 	private int frameNumber;
-	private String sourceFolder;
-	private String sourceFileName;
-	private String targetFolder;
-	private String formatName = "jpg";
-	private List<CropImage> cropImages;
+	private String sourceFilePath;
+	private final List<CropImage> cropImages;
+
+	public FrameImage() {
+		super();
+		this.cropImages = new ArrayList<CropImage>();
+	}
 
 	/**
 	 * @return the frameNumber
@@ -28,68 +31,23 @@ public class FrameImage implements Serializable {
 	 * @param frameNumber
 	 *            the frameNumber to set
 	 */
-	public void setFrameNumber(int frameNumber) {
+	public void setFrameNumber(final int frameNumber) {
 		this.frameNumber = frameNumber;
 	}
 
 	/**
-	 * @return the sourceFolder
+	 * @return the sourceFilePath
 	 */
-	public String getSourceFolder() {
-		return sourceFolder;
+	public String getSourceFilePath() {
+		return sourceFilePath;
 	}
 
 	/**
-	 * @param sourceFolder
-	 *            the sourceFolder to set
+	 * @param sourceFilePath
+	 *            the sourceFilePath to set
 	 */
-	public void setSourceFolder(String sourceFolder) {
-		this.sourceFolder = sourceFolder;
-	}
-
-	/**
-	 * @return the sourceFileName
-	 */
-	public String getSourceFileName() {
-		return sourceFileName;
-	}
-
-	/**
-	 * @param sourceFileName
-	 *            the sourceFileName to set
-	 */
-	public void setSourceFileName(String sourceFileName) {
-		this.sourceFileName = sourceFileName;
-	}
-
-	/**
-	 * @return the targetFolder
-	 */
-	public String getTargetFolder() {
-		return targetFolder;
-	}
-
-	/**
-	 * @param targetFolder
-	 *            the targetFolder to set
-	 */
-	public void setTargetFolder(String targetFolder) {
-		this.targetFolder = targetFolder;
-	}
-
-	/**
-	 * @return the formatName
-	 */
-	public String getFormatName() {
-		return formatName;
-	}
-
-	/**
-	 * @param formatName
-	 *            the formatName to set
-	 */
-	public void setFormatName(String formatName) {
-		this.formatName = formatName;
+	public void setSourceFilePath(final String sourceFilePath) {
+		this.sourceFilePath = sourceFilePath;
 	}
 
 	/**
@@ -100,11 +58,19 @@ public class FrameImage implements Serializable {
 	}
 
 	/**
+	 * @param cropImage
+	 *            the cropImage to add
+	 */
+	public void addCropImage(final CropImage cropImage) {
+		this.cropImages.add(cropImage);
+	}
+
+	/**
 	 * @param cropImages
 	 *            the cropImages to set
 	 */
-	public void setCropImages(List<CropImage> cropImages) {
-		this.cropImages = cropImages;
+	public void getCropImage(final int index) {
+		this.cropImages.get(index);
 	}
 
 }
