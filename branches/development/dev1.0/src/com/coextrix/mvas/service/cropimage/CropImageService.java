@@ -23,8 +23,8 @@ public final class CropImageService {
 	 *            [framesFolderPath, projectCacheDir, projectTitle,
 	 *            ecdValue,limitThumbNails]<br>
 	 *            Example "F:\\backup\\MVAS\\Records_600K_Images"
-	 *            "E:\\cache folder-path\\4324324324\\"
-	 *            "NEWCODE_600K_All_Images_ECD_3" 3 0
+	 *            "E:\\cache folder-path\\4324324324"
+	 *            "NEWCODE_600K_All_Images_ECD_3" "3" "0"
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 * @throws IOException
