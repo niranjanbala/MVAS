@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.coextrix.mvas.model.CropImage;
@@ -15,11 +16,12 @@ import com.coextrix.mvas.service.cropimage.CropInfo;
 
 public class CropImageDAO {
 
+	private static List<Integer> croppedIds = new ArrayList<Integer>();
+	private static List<Integer> missingIds = new ArrayList<Integer>();
+
 	public CropImageDAO() {
 		super();
 	}
-
-	
 
 	public List<FrameImage> findFrameImages(final Connection connection,
 			final CropInfo cropInfo) throws IOException, SQLException {
@@ -43,6 +45,7 @@ public class CropImageDAO {
 					frameFileName.append(formatNumber(frameNumber, 5));
 					frameFileName.append(".jpg");
 					if (!new File(frameFileName.toString()).isFile()) {
+						missingIds.add(resultSet.getInt("id"));
 						continue;
 					}
 					frameImage = new FrameImage();
@@ -71,9 +74,51 @@ public class CropImageDAO {
 		return frameImageList;
 	}
 
+	public void updateThumbNails(final Connection connection,
+			final CropInfo cropInfo) throws IOException, SQLException {
+		Statement statement = null;
+		try {
+			statement = connection.createStatement();
+			statement.executeUpdate(getUpdateThumbNailsQuery(cropInfo));
+			connection.commit();
+		} catch (SQLException e) {
+			throw new SQLException(e.getMessage(), e);
+		} finally {
+			if (statement != null) {
+				statement.close();
+			}
+			connection.close();
+		}
+	}
+
+	private String getUpdateThumbNailsQuery(final CropInfo cropInfo) {
+		StringBuffer filterCondition = new StringBuffer();
+		filterCondition.append(" ECD >= ");
+		filterCondition.append(cropInfo.getEcdValue());
+		if (!missingIds.isEmpty()) {
+			filterCondition.append(" AND ID NOT IN(");
+			filterCondition.append(integerListToString(missingIds));
+			filterCondition.append(")");
+		}
+		filterCondition.append(" AND ID IN(");
+		filterCondition.append(integerListToString(croppedIds));
+		filterCondition.append(")");
+		String selectSQL = "UPDATE CsvData SET THUMBNAIL_FLAG = 1 WHERE "
+				+ filterCondition;
+		return selectSQL;
+	}
+
+	private String integerListToString(List<Integer> list) {
+		String str = Arrays.toString(list.toArray());
+		str = str.substring(1, str.length());
+		str = str.substring(0, str.length() - 1);
+		return str;
+	}
+
 	private CropImage getCroppedImage(final ResultSet resultSet)
 			throws SQLException {
 		long id = resultSet.getLong("id");
+		croppedIds.add(resultSet.getInt("id"));
 		long particleId = resultSet.getLong("particle_id");
 		int x = resultSet.getInt("x_left");
 		int y = resultSet.getInt("y_top");

@@ -46,6 +46,7 @@ public final class CropImageService {
 				cropInfo);
 		ImageCropper cropper = new ImageCropper();
 		cropper.cropImages(frameImages, cropInfo);
+		cropImageDAO.updateThumbNails(connection, cropInfo);
 		long endTime = Calendar.getInstance().getTimeInMillis();
 		long timeElapsed = (endTime - startTime) / 1000;
 		System.out.println("Image cropping completed -- time taken : "
