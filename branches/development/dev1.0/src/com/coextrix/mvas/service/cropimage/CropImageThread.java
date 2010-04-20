@@ -61,9 +61,8 @@ public class CropImageThread implements Runnable {
 		try {
 			bufferedImage = toBufferedImage(frameImage.getSourceFilePath());
 		} catch (Exception e) {
-			for (CropImage cropImage : frameImage.getCropImages()) {
-				CropInfo.addMissingIds(new Long(cropImage.getId()).intValue());
-			}
+			CropInfo.addMissingFrameNumbers(frameImage.getFrameNumber());
+			return;
 		}
 		BufferedImage cropImg;
 		File tempFile;

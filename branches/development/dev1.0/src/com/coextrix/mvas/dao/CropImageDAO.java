@@ -42,7 +42,10 @@ public class CropImageDAO {
 					frameFileName.append(formatNumber(frameNumber, 5));
 					frameFileName.append(".jpg");
 					if (!new File(frameFileName.toString()).isFile()) {
-						CropInfo.addMissingIds(resultSet.getInt("id"));
+						if (!CropInfo.getMissingFrameNumbers().contains(
+								frameNumber)) {
+							CropInfo.addMissingFrameNumbers(frameNumber);
+						}
 						continue;
 					}
 					frameImage = new FrameImage();
@@ -90,36 +93,27 @@ public class CropImageDAO {
 				"UPDATE CsvData SET THUMBNAILFLAG = 1");
 		StringBuffer filterCondition = new StringBuffer();
 		if (cropInfo.getLimitThumbNails() != 0) {
-			if (cropInfo.getMissingIds().isEmpty()) {
-				filterCondition
-						.append(" ID IN(SELECT ID FROM CsvData WHERE ECD >= ");
-				filterCondition.append(cropInfo.getEcdValue());
-				filterCondition.append(" ORDER BY FRAME_NUMBER LIMIT ");
-				filterCondition.append(cropInfo.getLimitThumbNails());
-				filterCondition.append(")");
-			} else {
-				filterCondition
-						.append(" ID IN(SELECT ID FROM CsvData WHERE ECD >= ");
-				filterCondition.append(cropInfo.getEcdValue());
-				filterCondition.append(" ORDER BY FRAME_NUMBER LIMIT ");
-				filterCondition.append(cropInfo.getLimitThumbNails());
-				filterCondition.append(") AND ID NOT IN(");
-				filterCondition.append(integerListToString(cropInfo
-						.getMissingIds()));
-				filterCondition.append(")");
-			}
+			filterCondition
+					.append(" ID IN(SELECT ID FROM CsvData WHERE ECD >= ");
+			filterCondition.append(cropInfo.getEcdValue());
+			filterCondition.append(" ORDER BY FRAME_NUMBER LIMIT ");
+			filterCondition.append(cropInfo.getLimitThumbNails());
+			filterCondition.append(")");
 		} else {
-			if (cropInfo.getMissingIds().isEmpty()) {
-				filterCondition.append(" ECD >= ");
-				filterCondition.append(cropInfo.getEcdValue());
-			} else {
-				filterCondition.append(" ECD >= ");
-				filterCondition.append(cropInfo.getEcdValue());
-				filterCondition.append(" AND ID NOT IN(");
-				filterCondition.append(integerListToString(cropInfo
-						.getMissingIds()));
-				filterCondition.append(")");
-			}
+			filterCondition.append(" ECD >= ");
+			filterCondition.append(cropInfo.getEcdValue());
+		}
+		if (!cropInfo.getMissingIds().isEmpty()) {
+			filterCondition.append(" AND ID NOT IN(");
+			filterCondition
+					.append(integerListToString(cropInfo.getMissingIds()));
+			filterCondition.append(")");
+		}
+		if (!CropInfo.getMissingFrameNumbers().isEmpty()) {
+			filterCondition.append(" AND FRAME_NUMBER NOT IN(");
+			filterCondition.append(integerListToString(CropInfo
+					.getMissingFrameNumbers()));
+			filterCondition.append(")");
 		}
 		selectSQL.append(" WHERE ");
 		selectSQL.append(filterCondition);
@@ -152,7 +146,7 @@ public class CropImageDAO {
 			selectSQL = "select id,particle_id, frame_number, x_left, x_right, y_top, y_bottom from CsvData WHERE ECD>="
 					+ cropInfo.getEcdValue() + " ORDER BY frame_number;";
 		} else {
-			selectSQL = "select id, frame_number, x_left, x_right, y_top, y_bottom from CsvData WHERE ECD>="
+			selectSQL = "select id,particle_id, frame_number, x_left, x_right, y_top, y_bottom from CsvData WHERE ECD>="
 					+ cropInfo.getEcdValue()
 					+ " ORDER BY frame_number limit "
 					+ cropInfo.getLimitThumbNails() + ";";

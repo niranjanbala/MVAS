@@ -10,6 +10,7 @@ public class CropInfo {
 	private double ecdValue;
 	private long limitThumbNails;
 	private static List<Integer> missingIds = new ArrayList<Integer>();
+	private static List<Integer> missingFrameNumbers = new ArrayList<Integer>();
 
 	public String getFramesFolderPath() {
 		return framesFolderPath;
@@ -72,5 +73,28 @@ public class CropInfo {
 	 */
 	public List<Integer> getMissingIds() {
 		return CropInfo.missingIds;
+	}
+
+	/**
+	 * @param missingFrameNumbers
+	 *            the missingFrameNumbers to set
+	 */
+	public static void addMissingFrameNumbers(List<Integer> missingFrameNumbers) {
+		CropInfo.missingFrameNumbers.addAll(missingFrameNumbers);
+	}
+
+	/**
+	 * @param missingFrameNumber
+	 *            the missingFrameNumbers to set
+	 */
+	public static void addMissingFrameNumbers(int missingFrameNumber) {
+		CropInfo.missingFrameNumbers.add(missingFrameNumber);
+	}
+
+	/**
+	 * @return the missingFrameNumbers
+	 */
+	public static List<Integer> getMissingFrameNumbers() {
+		return CropInfo.missingFrameNumbers;
 	}
 }
