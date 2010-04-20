@@ -16,7 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,25 +47,24 @@ public class CropImageThread implements Runnable {
 	@Override
 	public void run() {
 		if (!frameImages.isEmpty()) {
-			try {
-				for (FrameImage frmImage : frameImages) {
-					cropImage(frmImage);
-				}
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			for (FrameImage frmImage : frameImages) {
+				cropImage(frmImage);
 			}
 		}
 	}
 
-	private void cropImage(final FrameImage frameImage)
-			throws FileNotFoundException, IOException, SQLException {
-		//final Image image = new ImageIcon(frameImage.getSourceFilePath()).getImage();
-		//final BufferedImage bufferedImage = toBufferedImage(image);
-		final BufferedImage bufferedImage = toBufferedImage(frameImage.getSourceFilePath());
+	private void cropImage(final FrameImage frameImage) {
+		// final Image image = new
+		// ImageIcon(frameImage.getSourceFilePath()).getImage();
+		// final BufferedImage bufferedImage = toBufferedImage(image);
+		BufferedImage bufferedImage = null;
+		try {
+			bufferedImage = toBufferedImage(frameImage.getSourceFilePath());
+		} catch (Exception e) {
+			for (CropImage cropImage : frameImage.getCropImages()) {
+				CropInfo.addMissingIds(new Long(cropImage.getId()).intValue());
+			}
+		}
 		BufferedImage cropImg;
 		File tempFile;
 		OutputStream tmpOutputStream;
@@ -75,9 +73,15 @@ public class CropImageThread implements Runnable {
 					.getY(), cropImage.getW(), cropImage.getH());
 			tempFile = new File(outDirectory + cropImage.getParticleId()
 					+ ".jpg");
-			tmpOutputStream = new FileOutputStream(tempFile);
-			ImageIO.write(cropImg, "jpg", tempFile);
-			tmpOutputStream.close();
+			try {
+				tmpOutputStream = new FileOutputStream(tempFile);
+				ImageIO.write(cropImg, "jpg", tempFile);
+				tmpOutputStream.close();
+			} catch (FileNotFoundException e) {
+				CropInfo.addMissingIds(new Long(cropImage.getId()).intValue());
+			} catch (IOException e) {
+				CropInfo.addMissingIds(new Long(cropImage.getId()).intValue());
+			}
 			CropImage.currentNo++;
 			if (CropImage.currentNo == unitCropImages
 					* (completionPercentage + 1)) {
@@ -90,8 +94,8 @@ public class CropImageThread implements Runnable {
 	}
 
 	/**
-	 * Returns BufferedImage by reading part of a JPEG from the disk
-	 * Memory Efficient Jpeg Crop
+	 * Returns BufferedImage by reading part of a JPEG from the disk Memory
+	 * Efficient Jpeg Crop
 	 * 
 	 * @param sourceFilePath
 	 * @return
@@ -100,7 +104,8 @@ public class CropImageThread implements Runnable {
 	 */
 	private BufferedImage toBufferedImage(final String sourceFilePath)
 			throws FileNotFoundException, IOException {
-		final ImageReader reader = ImageIO.getImageReadersByFormatName("JPEG").next();
+		final ImageReader reader = ImageIO.getImageReadersByFormatName("JPEG")
+				.next();
 		final ImageInputStream iis = ImageIO
 				.createImageInputStream(new FileInputStream(sourceFilePath));
 		reader.setInput(iis);
@@ -108,7 +113,7 @@ public class CropImageThread implements Runnable {
 		// System.out.println("height = " + reader.getHeight(0));
 		// ImageReadParam param = reader.getDefaultReadParam();
 		// param.setSourceRegion(new Rectangle(100, 100, 100, 100));
-		//return reader.read(0, param);
+		// return reader.read(0, param);
 		return reader.read(0);
 	}
 

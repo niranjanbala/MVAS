@@ -16,9 +16,6 @@ import com.coextrix.mvas.service.cropimage.CropInfo;
 
 public class CropImageDAO {
 
-	private static List<Integer> croppedIds = new ArrayList<Integer>();
-	private static List<Integer> missingIds = new ArrayList<Integer>();
-
 	public CropImageDAO() {
 		super();
 	}
@@ -45,7 +42,7 @@ public class CropImageDAO {
 					frameFileName.append(formatNumber(frameNumber, 5));
 					frameFileName.append(".jpg");
 					if (!new File(frameFileName.toString()).isFile()) {
-						missingIds.add(resultSet.getInt("id"));
+						CropInfo.addMissingIds(resultSet.getInt("id"));
 						continue;
 					}
 					frameImage = new FrameImage();
@@ -69,7 +66,6 @@ public class CropImageDAO {
 			if (statement != null) {
 				statement.close();
 			}
-			connection.close();
 		}
 		return frameImageList;
 	}
@@ -80,32 +76,56 @@ public class CropImageDAO {
 		try {
 			statement = connection.createStatement();
 			statement.executeUpdate(getUpdateThumbNailsQuery(cropInfo));
-			connection.commit();
 		} catch (SQLException e) {
 			throw new SQLException(e.getMessage(), e);
 		} finally {
 			if (statement != null) {
 				statement.close();
 			}
-			connection.close();
 		}
 	}
 
 	private String getUpdateThumbNailsQuery(final CropInfo cropInfo) {
+		StringBuffer selectSQL = new StringBuffer(
+				"UPDATE CsvData SET THUMBNAILFLAG = 1");
 		StringBuffer filterCondition = new StringBuffer();
-		filterCondition.append(" ECD >= ");
-		filterCondition.append(cropInfo.getEcdValue());
-		if (!missingIds.isEmpty()) {
-			filterCondition.append(" AND ID NOT IN(");
-			filterCondition.append(integerListToString(missingIds));
-			filterCondition.append(")");
+		if (cropInfo.getLimitThumbNails() != 0) {
+			if (cropInfo.getMissingIds().isEmpty()) {
+				filterCondition
+						.append(" ID IN(SELECT ID FROM CsvData WHERE ECD >= ");
+				filterCondition.append(cropInfo.getEcdValue());
+				filterCondition.append(" ORDER BY FRAME_NUMBER LIMIT ");
+				filterCondition.append(cropInfo.getLimitThumbNails());
+				filterCondition.append(")");
+			} else {
+				filterCondition
+						.append(" ID IN(SELECT ID FROM CsvData WHERE ECD >= ");
+				filterCondition.append(cropInfo.getEcdValue());
+				filterCondition.append(" ORDER BY FRAME_NUMBER LIMIT ");
+				filterCondition.append(cropInfo.getLimitThumbNails());
+				filterCondition.append(") AND ID NOT IN(");
+				filterCondition.append(integerListToString(cropInfo
+						.getMissingIds()));
+				filterCondition.append(")");
+			}
+		} else {
+			if (cropInfo.getMissingIds().isEmpty()) {
+				filterCondition.append(" ECD >= ");
+				filterCondition.append(cropInfo.getEcdValue());
+			} else {
+				filterCondition.append(" ECD >= ");
+				filterCondition.append(cropInfo.getEcdValue());
+				filterCondition.append(" AND ID NOT IN(");
+				filterCondition.append(integerListToString(cropInfo
+						.getMissingIds()));
+				filterCondition.append(")");
+			}
 		}
-		filterCondition.append(" AND ID IN(");
-		filterCondition.append(integerListToString(croppedIds));
-		filterCondition.append(")");
-		String selectSQL = "UPDATE CsvData SET THUMBNAIL_FLAG = 1 WHERE "
-				+ filterCondition;
-		return selectSQL;
+		selectSQL.append(" WHERE ");
+		selectSQL.append(filterCondition);
+		selectSQL.append(";");
+		System.out.println(selectSQL.toString());
+		return selectSQL.toString();
 	}
 
 	private String integerListToString(List<Integer> list) {
@@ -118,7 +138,6 @@ public class CropImageDAO {
 	private CropImage getCroppedImage(final ResultSet resultSet)
 			throws SQLException {
 		long id = resultSet.getLong("id");
-		croppedIds.add(resultSet.getInt("id"));
 		long particleId = resultSet.getLong("particle_id");
 		int x = resultSet.getInt("x_left");
 		int y = resultSet.getInt("y_top");
@@ -151,4 +170,5 @@ public class CropImageDAO {
 		}
 		return formattedNumber.toString();
 	}
+
 }
