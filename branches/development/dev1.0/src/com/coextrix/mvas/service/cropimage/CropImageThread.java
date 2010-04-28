@@ -34,14 +34,14 @@ public class CropImageThread implements Runnable {
 	private final long unitCropImages;
 	private String outDirectory;
 	public static int completionPercentage;
+	private static int currentNo;
 
 	public CropImageThread(final CropInfo cropInfo) {
 		super();
 		this.frameImages = new ArrayList<FrameImage>();
 		this.cropInfo = cropInfo;
-		this.unitCropImages = CropImage.totalCropImages / 100;
-		this.outDirectory = cropInfo.getProjectCacheDir() + "\\"
-				+ cropInfo.getProjectTitle() + "-Thumbnails\\";
+		this.unitCropImages = cropInfo.getTotalCropImages() / 100;
+		this.outDirectory = cropInfo.getProjectCacheDir() + "\\"+ cropInfo.getProjectTitle() + "-Thumbnails\\";
 	}
 
 	@Override
@@ -54,9 +54,7 @@ public class CropImageThread implements Runnable {
 	}
 
 	private void cropImage(final FrameImage frameImage) {
-		// final Image image = new
-		// ImageIcon(frameImage.getSourceFilePath()).getImage();
-		// final BufferedImage bufferedImage = toBufferedImage(image);
+	
 		BufferedImage bufferedImage = null;
 		try {
 			bufferedImage = toBufferedImage(frameImage.getSourceFilePath());
@@ -68,10 +66,8 @@ public class CropImageThread implements Runnable {
 		File tempFile;
 		OutputStream tmpOutputStream;
 		for (CropImage cropImage : frameImage.getCropImages()) {
-			cropImg = bufferedImage.getSubimage(cropImage.getX(), cropImage
-					.getY(), cropImage.getW(), cropImage.getH());
-			tempFile = new File(outDirectory + cropImage.getParticleId()
-					+ ".jpg");
+			cropImg = bufferedImage.getSubimage(cropImage.getX(), cropImage.getY(), cropImage.getW(), cropImage.getH());
+			tempFile = new File(outDirectory + cropImage.getParticleId()+ ".jpg");
 			try {
 				tmpOutputStream = new FileOutputStream(tempFile);
 				ImageIO.write(cropImg, "jpg", tempFile);
@@ -81,13 +77,10 @@ public class CropImageThread implements Runnable {
 			} catch (IOException e) {
 				CropInfo.addMissingIds(new Long(cropImage.getId()).intValue());
 			}
-			CropImage.currentNo++;
-			if (CropImage.currentNo == unitCropImages
-					* (completionPercentage + 1)) {
-				completionPercentage++;
-				System.out.println("Native process: Cropping in progress,"
-						+ CropImage.currentNo + "," + CropImage.totalCropImages
-						+ "," + completionPercentage);
+			currentNo++;
+			if(unitCropImages*(completionPercentage+25) == currentNo){
+				completionPercentage = completionPercentage+25;
+				System.out.println("Image cropping percentage :"+completionPercentage);
 			}
 		}
 	}
@@ -103,19 +96,17 @@ public class CropImageThread implements Runnable {
 	 */
 	private BufferedImage toBufferedImage(final String sourceFilePath)
 			throws FileNotFoundException, IOException {
-		final ImageReader reader = ImageIO.getImageReadersByFormatName("JPEG")
-				.next();
-		final ImageInputStream iis = ImageIO
-				.createImageInputStream(new FileInputStream(sourceFilePath));
+		final ImageReader reader = ImageIO.getImageReadersByFormatName("JPEG").next();
+		final ImageInputStream iis = ImageIO.createImageInputStream(new FileInputStream(sourceFilePath));
 		reader.setInput(iis);
-		// System.out.println("width = " + reader.getWidth(0));
-		// System.out.println("height = " + reader.getHeight(0));
-		// ImageReadParam param = reader.getDefaultReadParam();
-		// param.setSourceRegion(new Rectangle(100, 100, 100, 100));
-		// return reader.read(0, param);
 		return reader.read(0);
-	}
+	} 
 
+	/**
+	 * TODO:not used.
+	 * @param image
+	 * @return
+	 */
 	private BufferedImage toBufferedImage(final Image image) {
 		if (image instanceof BufferedImage) {
 			return (BufferedImage) image;

@@ -9,8 +9,8 @@ import java.io.Serializable;
 public class CropImage implements Serializable {
 
 	private static final long serialVersionUID = 4247982568836891828L;
-	public static long totalCropImages;
-	public static long currentNo;
+	//public static long totalCropImages;
+	//public static long currentNo;
 	private long id;
 	private long particleId;
 	private int x;

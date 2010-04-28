@@ -3,7 +3,6 @@ package com.coextrix.mvas.service.cropimage;
 import java.util.Iterator;
 import java.util.List;
 
-import com.coextrix.mvas.model.CropImage;
 import com.coextrix.mvas.model.FrameImage;
 
 /*
@@ -17,7 +16,7 @@ public class ImageCropper {
 		final Iterator<FrameImage> frameImagesIter = frameImages.iterator();
 
 		int currentThread = 1;
-		final long imagesPerThread = CropImage.totalCropImages / 6;
+		final long imagesPerThread = cropInfo.getTotalCropImages()/ 6;
 		final CropImageThread cropImageThread1 = new CropImageThread(cropInfo);
 		final CropImageThread cropImageThread2 = new CropImageThread(cropInfo);
 		final CropImageThread cropImageThread3 = new CropImageThread(cropInfo);
