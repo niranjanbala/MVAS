@@ -31,16 +31,17 @@ public class CropImageThread implements Runnable {
 
 	private final CropInfo cropInfo;
 	private List<FrameImage> frameImages;
-	private final long unitCropImages;
+	private final double unitCropImages;
 	private String outDirectory;
-	public static int completionPercentage;
+	private static int completionPercentage;
 	private static int currentNo;
-
+	private int percentage_count = 5;
+	
 	public CropImageThread(final CropInfo cropInfo) {
 		super();
 		this.frameImages = new ArrayList<FrameImage>();
 		this.cropInfo = cropInfo;
-		this.unitCropImages = cropInfo.getTotalCropImages() / 100;
+		this.unitCropImages = (double)cropInfo.getTotalCropImages() / 100;
 		this.outDirectory = cropInfo.getProjectCacheDir() + "\\"+ cropInfo.getProjectTitle() + "-Thumbnails\\";
 	}
 
@@ -78,8 +79,9 @@ public class CropImageThread implements Runnable {
 				CropInfo.addMissingIds(new Long(cropImage.getId()).intValue());
 			}
 			currentNo++;
-			if(unitCropImages*(completionPercentage+25) == currentNo){
-				completionPercentage = completionPercentage+25;
+			int currentFactor = (int) (unitCropImages*(completionPercentage+percentage_count));
+			if(currentFactor == currentNo){
+				completionPercentage = completionPercentage+percentage_count;
 				System.out.println("Image cropping percentage :"+completionPercentage);
 			}
 		}
