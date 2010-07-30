@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="create_run_jar" name="Create Runnable Jar for Project MVAS-ImageCropping">
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
-    <!--ANT 1.7 is required                                        -->
+    <!--ANT 1.7 is required     -->
+         
+    <property name="project.loc" value="." />
+	<property name="jarFile.path" value="${project.loc}/imageCropping.jar" />
+	                              
     <target name="create_run_jar">
-        <jar destfile="E:/ws_di/MVAS-ImageCropping/imageCropping.jar" filesetmanifest="mergewithoutmain">
+        <jar destfile="${jarFile.path}" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Built-By" value="${user.name}"/>
                 <attribute name="Main-Class" value="com.coextrix.mvas.service.cropimage.CropImageService"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
-            <fileset dir="E:/ws_di/MVAS-ImageCropping/bin"/>
-            <zipfileset excludes="META-INF/*.SF" src="E:/ws_di/MVAS-ImageCropping/lib/sqlitejdbc-v056.jar"/>
+            <fileset dir="${project.loc}/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="${project.loc}/lib/sqlitejdbc-v056.jar"/>
+        	<zipfileset excludes="META-INF/*.SF" src="${project.loc}/lib/log4j-1.2.14.jar"/>
         </jar>
     </target>
 </project>

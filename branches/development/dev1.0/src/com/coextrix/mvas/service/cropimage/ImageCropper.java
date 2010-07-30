@@ -3,6 +3,8 @@ package com.coextrix.mvas.service.cropimage;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.coextrix.mvas.model.FrameImage;
 
 /*
@@ -10,8 +12,13 @@ import com.coextrix.mvas.model.FrameImage;
  */
 public class ImageCropper {
 
+	private Logger logger = Logger.getLogger(this.getClass());
+	
 	public void cropImages(final List<FrameImage> frameImages,
 			final CropInfo cropInfo) {
+		if(logger.isInfoEnabled()){
+			logger.info("Crop Image started ");
+		}
 		long currentCount = 0;
 		final Iterator<FrameImage> frameImagesIter = frameImages.iterator();
 
@@ -63,6 +70,10 @@ public class ImageCropper {
 		cropImageThread4.cropImage();
 		cropImageThread5.cropImage();
 		cropImageThread6.cropImage();
+		
+		if(logger.isInfoEnabled()){
+			logger.info("Crop Image End ");
+		}
 	}
 
 	private static boolean isCurrentThreadThreshHold(final long currentCount,
