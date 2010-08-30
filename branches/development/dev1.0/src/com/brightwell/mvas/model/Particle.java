@@ -1,4 +1,4 @@
-package com.coextrix.mvas.model;
+package com.brightwell.mvas.model;
 
 
 /**

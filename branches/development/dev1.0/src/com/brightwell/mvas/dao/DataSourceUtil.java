@@ -1,4 +1,4 @@
-package com.coextrix.mvas.dao;
+package com.brightwell.mvas.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import com.coextrix.mvas.service.cropimage.FrameCroppingException;
+import com.brightwell.mvas.service.cropimage.FrameCroppingException;
 
 public final class DataSourceUtil {
 

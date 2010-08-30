@@ -1,4 +1,4 @@
-package com.coextrix.mvas.service.cropimage;
+package com.brightwell.mvas.service.cropimage;
 
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
@@ -24,8 +24,8 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.ImageIcon;
 
-import com.coextrix.mvas.model.CropImage;
-import com.coextrix.mvas.model.FrameImage;
+import com.brightwell.mvas.model.CropImage;
+import com.brightwell.mvas.model.FrameImage;
 
 public class CropImageThread implements Runnable {
 
