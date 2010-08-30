@@ -10,7 +10,7 @@
         <jar destfile="${jarFile.path}" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Built-By" value="${user.name}"/>
-                <attribute name="Main-Class" value="com.coextrix.mvas.service.cropimage.CropImageService"/>
+                <attribute name="Main-Class" value="com.brightwell.mvas.service.cropimage.CropImageService"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
             <fileset dir="${project.loc}/bin"/>
