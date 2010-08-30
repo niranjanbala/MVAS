@@ -1,4 +1,4 @@
-package com.coextrix.mvas.service.cropimage;
+package com.brightwell.mvas.service.cropimage;
 
 public class FrameCroppingException extends Exception{
 	/**

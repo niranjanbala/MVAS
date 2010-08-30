@@ -1,11 +1,11 @@
-package com.coextrix.mvas.service.cropimage;
+package com.brightwell.mvas.service.cropimage;
 
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.coextrix.mvas.model.FrameImage;
+import com.brightwell.mvas.model.FrameImage;
 
 /*
  * TODO cropImages() thread service has a busy wait while loop.This about an alternative

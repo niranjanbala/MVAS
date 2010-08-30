@@ -1,4 +1,4 @@
-package com.coextrix.mvas.dao;
+package com.brightwell.mvas.dao;
 
 import java.util.Arrays;
 import java.util.List;

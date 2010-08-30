@@ -1,4 +1,4 @@
-package com.coextrix.mvas.service.cropimage;
+package com.brightwell.mvas.service.cropimage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,10 +13,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import com.coextrix.mvas.dao.CropImageDAO;
-import com.coextrix.mvas.dao.CropUtil;
-import com.coextrix.mvas.dao.DataSourceUtil;
-import com.coextrix.mvas.model.FrameImage;
+import com.brightwell.mvas.dao.CropImageDAO;
+import com.brightwell.mvas.dao.CropUtil;
+import com.brightwell.mvas.dao.DataSourceUtil;
+import com.brightwell.mvas.model.FrameImage;
 
 public final class CropImageService {
 

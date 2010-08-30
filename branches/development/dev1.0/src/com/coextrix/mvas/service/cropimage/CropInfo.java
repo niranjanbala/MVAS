@@ -1,4 +1,4 @@
-package com.coextrix.mvas.service.cropimage;
+package com.brightwell.mvas.service.cropimage;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package com.coextrix.mvas.dao;
+package com.brightwell.mvas.dao;
 
 import java.io.File;
 import java.sql.Connection;
@@ -10,10 +10,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.coextrix.mvas.model.CropImage;
-import com.coextrix.mvas.model.FrameImage;
-import com.coextrix.mvas.service.cropimage.CropInfo;
-import com.coextrix.mvas.service.cropimage.FrameCroppingException;
+import com.brightwell.mvas.model.CropImage;
+import com.brightwell.mvas.model.FrameImage;
+import com.brightwell.mvas.service.cropimage.CropInfo;
+import com.brightwell.mvas.service.cropimage.FrameCroppingException;
 
 public class CropImageDAO {
 
