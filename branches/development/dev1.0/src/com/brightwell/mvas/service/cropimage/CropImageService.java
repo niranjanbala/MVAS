@@ -57,14 +57,19 @@ public final class CropImageService {
 		CropImageDAO cropImageDAO = new CropImageDAO();
 		Connection connection = DataSourceUtil.getSQLiteConnection(cropInfo.getProjectCacheDir()
 				+ "\\" + cropInfo.getProjectTitle() + ".db");
-		List<FrameImage> frameImages = cropImageDAO.findFrameImages(connection,cropInfo);
+		List<FrameImage> frameImages = null;
+		try{
+		frameImages = cropImageDAO.findFrameImages(connection,cropInfo);
 		ImageCropper cropper = new ImageCropper();
 		cropper.cropImages(frameImages, cropInfo);
 		cropImageDAO.updateThumbNails(connection, cropInfo);
-		try{
-			connection.close();
-		}catch (SQLException e) {
-			throw new FrameCroppingException("Cropping failed",e);
+		}
+		finally{
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new FrameCroppingException("Cropping failed",e);
+			}
 		}
 		service.copyFrameImagesToProjectCache(cropInfo,frameImages);
 		service.printTime(startTime); 

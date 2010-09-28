@@ -95,6 +95,7 @@ public class CropImageDAO {
 		Statement statement = null;
 		try {
 			statement = connection.createStatement();
+			statement.setQueryTimeout(60);
 			statement.executeUpdate(getUpdateThumbNailsQuery(cropInfo));
 		} catch (SQLException e) {
 			logger.info("Error updating thumbnails", e);
