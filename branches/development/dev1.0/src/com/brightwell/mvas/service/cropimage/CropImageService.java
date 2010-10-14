@@ -21,7 +21,7 @@ import com.brightwell.mvas.model.FrameImage;
 public final class CropImageService {
 
 	private static Logger logger ;
-	private static int ARG_COUNT = 5;
+	private static int ARG_COUNT = 6;
 	private static final String LOG4J_PROPERTIES = "log4j.conf";
 	
 	private CropImageService() {
@@ -41,7 +41,7 @@ public final class CropImageService {
 	 * @throws FrameCroppingException 
 	 */
 	public static void main(final String[] args) throws  FrameCroppingException {
-		long startTime = Calendar.getInstance().getTimeInMillis();
+		//long startTime = Calendar.getInstance().getTimeInMillis(); // required only when running this jar separately
 		if (args.length != ARG_COUNT) {
 			throw new IllegalArgumentException(
 					"Native process error:Cropping argument missmatch");
@@ -72,11 +72,11 @@ public final class CropImageService {
 			}
 		}
 		service.copyFrameImagesToProjectCache(cropInfo,frameImages);
-		service.printTime(startTime); 
+		//service.printTime(startTime); // required only when running this jar separately
 		if(logger.isInfoEnabled()){
 			logger.info("Cropping Image End");
 		}
-		System.out.println("Image cropping completed :Missing frame ids="+CropUtil.integerListToString(CropInfo.getMissingFrameNumbers()));
+		System.out.println("Image cropping completed : Missing frame ids="+CropUtil.integerListToString(CropInfo.getMissingFrameNumbers()));
 	}
 
 	private void copyFrameImagesToProjectCache(CropInfo cropInfo, List<FrameImage> frameImages) throws FrameCroppingException {
@@ -95,27 +95,36 @@ public final class CropImageService {
 		}
 		
 	}
-
-	private void printTime(long startTime){
-		//only to de-bug
-		long endTime = Calendar.getInstance().getTimeInMillis();
-		long timeElapsed = (endTime - startTime) / 1000;
-		System.out.println("Image cropping completed -- time taken : "+ timeElapsed /60+ " min");
-	}
-	private CropInfo getCropInfo(String[] args) {
+	
+	// required only when running this jar separately
+//	private void printTime(long startTime)
+//	{
+//		long endTime = Calendar.getInstance().getTimeInMillis();
+//		long timeElapsed = (endTime - startTime) / 1000;
+//		System.out.println("Image cropping completed -- time taken : "+ timeElapsed /60+ " min");
+//	}
+	
+	private CropInfo getCropInfo(String[] args)
+	{
 		CropInfo cropInfo = new CropInfo();
+		
 		String framesFolderPath = args[0];
-		cropInfo.setFramesFolderPath(framesFolderPath);
 		String projectCacheDir = args[1];
-		cropInfo.setProjectCacheDir(projectCacheDir);
 		String projectTitle = args[2];
-		cropInfo.setProjectTitle(projectTitle);
 		double ecdValue = Double.parseDouble(args[3]);
-		cropInfo.setEcdValue(ecdValue);
 		long limitThumbNails = Long.parseLong(args[4]);
+		long numberOfThumbnailsPerPage = Long.parseLong(args[5]); // this gives the number of thumbnails to display per page
+		
+		cropInfo.setFramesFolderPath(framesFolderPath);
+		cropInfo.setProjectCacheDir(projectCacheDir);
+		cropInfo.setProjectTitle(projectTitle);
+		cropInfo.setEcdValue(ecdValue);
 		cropInfo.setLimitThumbNails(limitThumbNails);
+		cropInfo.setNumberOfThumbnailsPerPage(numberOfThumbnailsPerPage);
+		
 		return cropInfo;
 	}
+	
 	private static void initilizeLog4j(String cacheFolderPath){
 		File file = new File(cacheFolderPath); //cacheFolderPath has project folder appended
 		if(!file.exists()){

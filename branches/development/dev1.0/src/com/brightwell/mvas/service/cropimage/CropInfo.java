@@ -5,17 +5,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class CropInfo {
+public class CropInfo
+{
 	private String framesFolderPath;
 	private String projectCacheDir;
 	private String projectTitle;
 	private double ecdValue;
 	private long limitThumbNails;
+	
+	/**
+	 * This gives the number of thumbnails to display per page
+	 */
+	private long numberOfThumbnailsPerPage;
+	
 	private static List<Integer> missingIds = new ArrayList<Integer>();
 	private static Set<Integer> missingFrameNumbers = new HashSet<Integer>();//hold all frames-ids which are missing the image
 	private long totalCropImages;
 	
-
 	public String getFramesFolderPath() {
 		return framesFolderPath;
 	}
@@ -54,6 +60,22 @@ public class CropInfo {
 
 	public void setLimitThumbNails(final long limitThumbNails) {
 		this.limitThumbNails = limitThumbNails;
+	}
+
+	/**
+	 * @return the numberOfImagesInFirstPage
+	 */
+	public long getNumberOfThumbnailsPerPage()
+	{
+		return this.numberOfThumbnailsPerPage;
+	}
+
+	/**
+	 * @param numberOfImagesPerPage: is the number of thumbnails to display per page
+	 */
+	public void setNumberOfThumbnailsPerPage(long numberOfThumbnailsPerPageArg)
+	{
+		this.numberOfThumbnailsPerPage = numberOfThumbnailsPerPageArg;
 	}
 
 	/**

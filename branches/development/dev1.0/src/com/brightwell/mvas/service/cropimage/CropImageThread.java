@@ -79,6 +79,11 @@ public class CropImageThread implements Runnable {
 				CropInfo.addMissingIds(new Long(cropImage.getId()).intValue());
 			}
 			currentNo++;
+			
+			// send a notification to Flex as soon as first page thumbnails are generated
+			if(currentNo == this.cropInfo.getNumberOfThumbnailsPerPage())
+				System.out.println("Generating first page thumbnails completed");
+			
 			int currentFactor = (int) (unitCropImages*(completionPercentage+percentage_count));
 			if(currentFactor == currentNo){
 				completionPercentage = completionPercentage+percentage_count;
