@@ -18,6 +18,11 @@ public class CropInfo
 	 */
 	private long numberOfThumbnailsPerPage;
 	
+	/**
+	 * This gives the complete path of 'log4j.conf' file
+	 */
+	private String log4JPropertiesFilePath;
+	
 	private static List<Integer> missingIds = new ArrayList<Integer>();
 	private static Set<Integer> missingFrameNumbers = new HashSet<Integer>();//hold all frames-ids which are missing the image
 	private long totalCropImages;
@@ -76,6 +81,22 @@ public class CropInfo
 	public void setNumberOfThumbnailsPerPage(long numberOfThumbnailsPerPageArg)
 	{
 		this.numberOfThumbnailsPerPage = numberOfThumbnailsPerPageArg;
+	}
+
+	/**
+	 * @return the log4JPropertiesFilePath
+	 */
+	public String getLog4JPropertiesFilePath()
+	{
+		return log4JPropertiesFilePath;
+	}
+
+	/**
+	 * @param log4JPropertiesFilePath: is the complete path of 'log4j.conf' properties file
+	 */
+	public void setLog4JPropertiesFilePath(String log4JPropertiesFilePathArg)
+	{
+		this.log4JPropertiesFilePath = log4JPropertiesFilePathArg;
 	}
 
 	/**

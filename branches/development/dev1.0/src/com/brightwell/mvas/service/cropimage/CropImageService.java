@@ -21,8 +21,7 @@ import com.brightwell.mvas.model.FrameImage;
 public final class CropImageService {
 
 	private static Logger logger ;
-	private static int ARG_COUNT = 6;
-	private static final String LOG4J_PROPERTIES = "log4j.conf";
+	private static int ARG_COUNT = 7;
 	
 	private CropImageService() {
 		super();
@@ -48,7 +47,7 @@ public final class CropImageService {
 		}
 		CropImageService service = new CropImageService();
 		CropInfo cropInfo = service.getCropInfo(args);
-		initilizeLog4j(cropInfo.getProjectCacheDir());
+		initilizeLog4j(cropInfo.getLog4JPropertiesFilePath());
 		logger = Logger.getLogger(CropImageService.class);
 		
 		if(logger.isInfoEnabled()){
@@ -114,6 +113,7 @@ public final class CropImageService {
 		double ecdValue = Double.parseDouble(args[3]);
 		long limitThumbNails = Long.parseLong(args[4]);
 		long numberOfThumbnailsPerPage = Long.parseLong(args[5]); // this gives the number of thumbnails to display per page
+		String log4JPropertiesFilePath = args[6];
 		
 		cropInfo.setFramesFolderPath(framesFolderPath);
 		cropInfo.setProjectCacheDir(projectCacheDir);
@@ -121,20 +121,19 @@ public final class CropImageService {
 		cropInfo.setEcdValue(ecdValue);
 		cropInfo.setLimitThumbNails(limitThumbNails);
 		cropInfo.setNumberOfThumbnailsPerPage(numberOfThumbnailsPerPage);
+		cropInfo.setLog4JPropertiesFilePath(log4JPropertiesFilePath);
 		
 		return cropInfo;
 	}
 	
-	private static void initilizeLog4j(String cacheFolderPath){
-		File file = new File(cacheFolderPath); //cacheFolderPath has project folder appended
-		if(!file.exists()){
-			return ;
-		}
-		String cacheFolder = file.getParent();//actual cache folder 
-		String propertyFilePath = cacheFolder + File.separator + LOG4J_PROPERTIES;
-		if(new File(propertyFilePath).exists()){//log4j configuration exist
-			PropertyConfigurator.configure(propertyFilePath);
-		}
+	private static void initilizeLog4j(String log4JPropertiesFilePathArg)
+	{
+		File log4JPropertiesFile = new File(log4JPropertiesFilePathArg);
+		
+		if(!log4JPropertiesFile.exists())
+			return;
+		else
+			PropertyConfigurator.configure(log4JPropertiesFilePathArg);
 	}
 
 }
