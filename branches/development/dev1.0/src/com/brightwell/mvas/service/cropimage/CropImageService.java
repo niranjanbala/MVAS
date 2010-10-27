@@ -51,7 +51,7 @@ public final class CropImageService {
 		logger = Logger.getLogger(CropImageService.class);
 		
 		if(logger.isInfoEnabled()){
-			logger.info("Cropping started");
+			logger.info("Frame cropping started");
 		}
 		CropImageDAO cropImageDAO = new CropImageDAO();
 		Connection connection = DataSourceUtil.getSQLiteConnection(cropInfo.getProjectCacheDir()
@@ -73,7 +73,7 @@ public final class CropImageService {
 		service.copyFrameImagesToProjectCache(cropInfo,frameImages);
 		//service.printTime(startTime); // required only when running this jar separately
 		if(logger.isInfoEnabled()){
-			logger.info("Cropping Image End");
+			logger.info("Frame cropping completed\n");
 		}
 		System.out.println("Image cropping completed : Missing frame ids="+CropUtil.integerListToString(CropInfo.getMissingFrameNumbers()));
 	}
