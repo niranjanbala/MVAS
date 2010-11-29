@@ -10,6 +10,7 @@ import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.PixelGrabber;
+import java.awt.image.RasterFormatException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,6 +25,8 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.ImageIcon;
 
+import org.apache.log4j.Logger;
+
 import com.brightwell.mvas.model.CropImage;
 import com.brightwell.mvas.model.FrameImage;
 
@@ -36,6 +39,8 @@ public class CropImageThread implements Runnable {
 	private static int completionPercentage;
 	private static int currentNo;
 	private int percentage_count = 5;
+	
+	private Logger logger = Logger.getLogger(this.getClass());
 	
 	public CropImageThread(final CropInfo cropInfo) {
 		super();
@@ -67,27 +72,38 @@ public class CropImageThread implements Runnable {
 		File tempFile;
 		OutputStream tmpOutputStream;
 		for (CropImage cropImage : frameImage.getCropImages()) {
-			cropImg = bufferedImage.getSubimage(cropImage.getX(), cropImage.getY(), cropImage.getW(), cropImage.getH());
-			tempFile = new File(outDirectory + cropImage.getParticleId()+ ".jpg");
-			try {
-				tmpOutputStream = new FileOutputStream(tempFile);
-				ImageIO.write(cropImg, "jpg", tempFile);
-				tmpOutputStream.close();
-			} catch (FileNotFoundException e) {
-				CropInfo.addMissingIds(new Long(cropImage.getId()).intValue());
-			} catch (IOException e) {
-				CropInfo.addMissingIds(new Long(cropImage.getId()).intValue());
+			try
+			{
+				cropImg = bufferedImage.getSubimage(cropImage.getX(), cropImage.getY(), cropImage.getW(), cropImage.getH());
+				tempFile = new File(outDirectory + cropImage.getParticleId()+ ".jpg");
+				try {
+					tmpOutputStream = new FileOutputStream(tempFile);
+					ImageIO.write(cropImg, "jpg", tempFile);
+					tmpOutputStream.close();
+				} catch (FileNotFoundException e) {
+					CropInfo.addMissingIds(new Long(cropImage.getId()).intValue());
+				} catch (IOException e) {
+					CropInfo.addMissingIds(new Long(cropImage.getId()).intValue());
+				}
+				currentNo++;
+				
+				// send a notification to Flex as soon as first page thumbnails are generated
+				if(currentNo == this.cropInfo.getNumberOfThumbnailsPerPage())
+					System.out.println("Generating first page thumbnails completed");
+				
+				int currentFactor = (int) (unitCropImages*(completionPercentage+percentage_count));
+				if(currentFactor == currentNo){
+					completionPercentage = completionPercentage+percentage_count;
+					System.out.println("Image cropping percentage :"+completionPercentage);
+				}
 			}
-			currentNo++;
-			
-			// send a notification to Flex as soon as first page thumbnails are generated
-			if(currentNo == this.cropInfo.getNumberOfThumbnailsPerPage())
-				System.out.println("Generating first page thumbnails completed");
-			
-			int currentFactor = (int) (unitCropImages*(completionPercentage+percentage_count));
-			if(currentFactor == currentNo){
-				completionPercentage = completionPercentage+percentage_count;
-				System.out.println("Image cropping percentage :"+completionPercentage);
+			catch(RasterFormatException err)
+			{
+				CropInfo.addMissingIds(new Long(cropImage.getId()).intValue());
+				String errMsg = "Cannot crop image for particle with ID as : " + cropImage.getId() + 
+								" and particle ID as : " + cropImage.getParticleId() + 
+								"\nRaster format exception during frame cropping";
+				logger.error(errMsg, err);
 			}
 		}
 	}
