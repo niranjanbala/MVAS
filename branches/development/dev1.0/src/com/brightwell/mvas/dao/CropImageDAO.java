@@ -1,6 +1,9 @@
 package com.brightwell.mvas.dao;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +21,7 @@ import com.brightwell.mvas.service.cropimage.FrameCroppingException;
 public class CropImageDAO {
 
 	private Logger logger = Logger.getLogger(this.getClass());
+	private static String FRAME_CROPPING_CONF_FILE_NAME = "frameCropping.conf";
 	
 	public CropImageDAO() {
 		super();
@@ -182,6 +186,45 @@ public class CropImageDAO {
 			formatted.append("0");
 		}
 		return formatted.append(number).toString();
+	}
+	
+	public void updateFrameCroppingConfFileInProjectCache(final CropInfo cropInfo) throws FrameCroppingException
+	{
+		if(logger.isInfoEnabled())
+			logger.info("Started writing to frame cropping conf file in project cache folder");
+		
+		String sqlQueryToUpdateThumbailFlag = getUpdateThumbNailsQuery(cropInfo);
+		String frameCroppingConfFilePath = cropInfo.getProjectCacheDir() + File.separator + File.separator + FRAME_CROPPING_CONF_FILE_NAME;
+		File frameCroppingFile;
+		FileOutputStream frameCroppingFileOutputStream;
+		
+		if(!frameCroppingConfFilePath.isEmpty())
+		{
+			try
+			{
+				frameCroppingFile = new File(frameCroppingConfFilePath);
+				frameCroppingFileOutputStream = new FileOutputStream(frameCroppingFile);
+				
+				if(logger.isInfoEnabled())
+					logger.info("Opened file stream to frame cropping conf file in project cache folder successfully");
+				
+				frameCroppingFileOutputStream.write(sqlQueryToUpdateThumbailFlag.getBytes());
+				
+				if(logger.isInfoEnabled())
+					logger.info("Writing to frame cropping conf file in project cache folder completed successfully");
+			}
+			catch (Exception err)
+			{
+				String errMsg = "Cannot write to frame cropping conf file : " + err.toString();
+				logger.error(errMsg, err);
+				throw new FrameCroppingException(err.getMessage(), err.getCause());
+			}
+			finally
+			{
+				frameCroppingFile = null;
+				frameCroppingFileOutputStream = null;
+			}
+		}
 	}
 
 }
