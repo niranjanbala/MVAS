@@ -94,10 +94,7 @@ public class CropImageThread implements Runnable {
 				int currentFactor = (int) (unitCropImages*(completionPercentage+percentage_count));
 				if(currentFactor == currentNo){
 					completionPercentage = completionPercentage+percentage_count;
-					// display the image cropping percentage only if it is less than or equal to '95'
-					// in some use-cases, the image cropping percentage will be more than 100 and this should not be displayed
-					if(completionPercentage <= 95)
-						System.out.println("Image cropping percentage :"+completionPercentage);
+					System.out.println("Image cropping percentage :"+completionPercentage);
 				}
 			}
 			catch(RasterFormatException err)

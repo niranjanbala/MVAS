@@ -61,15 +61,7 @@ public final class CropImageService {
 		frameImages = cropImageDAO.findFrameImages(connection,cropInfo);
 		ImageCropper cropper = new ImageCropper();
 		cropper.cropImages(frameImages, cropInfo);
-		
-		// display the image cropping percentage as '99' after completing all the required cropping and before updating the 'thumbnailFlag' in DB
-		System.out.println("Image cropping percentage :99");
-		
-		//cropImageDAO.updateThumbNails(connection, cropInfo);
-		if(logger.isInfoEnabled())
-			logger.info("Updating frame cropping conf file in project cache folder started from main");
-		
-		cropImageDAO.updateFrameCroppingConfFileInProjectCache(cropInfo);
+		cropImageDAO.updateThumbNails(connection, cropInfo);
 		}
 		finally{
 			try {
