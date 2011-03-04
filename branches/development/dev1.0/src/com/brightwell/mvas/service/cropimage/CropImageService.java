@@ -55,7 +55,7 @@ public final class CropImageService {
 		}
 		CropImageDAO cropImageDAO = new CropImageDAO();
 		Connection connection = DataSourceUtil.getSQLiteConnection(cropInfo.getProjectCacheDir()
-				+ "\\" + cropInfo.getProjectTitle() + ".db");
+				+ "\\data\\" + cropInfo.getProjectTitle() + ".db");
 		List<FrameImage> frameImages = null;
 		try{
 		frameImages = cropImageDAO.findFrameImages(connection,cropInfo);
