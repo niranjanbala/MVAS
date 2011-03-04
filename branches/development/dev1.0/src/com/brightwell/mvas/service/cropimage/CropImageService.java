@@ -79,7 +79,7 @@ public final class CropImageService {
 	}
 
 	private void copyFrameImagesToProjectCache(CropInfo cropInfo, List<FrameImage> frameImages) throws FrameCroppingException {
-		String destination = cropInfo.getProjectCacheDir() + "\\"+ cropInfo.getProjectTitle() + "-Frames\\";
+		String destination = cropInfo.getProjectCacheDir() + "\\" + "frames\\";
 		for(FrameImage image:frameImages){
 			File imgFile = new File(image.getSourceFilePath());
 			try{

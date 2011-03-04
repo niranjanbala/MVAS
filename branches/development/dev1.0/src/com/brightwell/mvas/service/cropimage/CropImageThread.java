@@ -47,7 +47,7 @@ public class CropImageThread implements Runnable {
 		this.frameImages = new ArrayList<FrameImage>();
 		this.cropInfo = cropInfo;
 		this.unitCropImages = (double)cropInfo.getTotalCropImages() / 100;
-		this.outDirectory = cropInfo.getProjectCacheDir() + "\\"+ cropInfo.getProjectTitle() + "-Thumbnails\\";
+		this.outDirectory = cropInfo.getProjectCacheDir() + "\\" + "thumbnails\\";
 	}
 
 	@Override
