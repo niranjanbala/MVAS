@@ -7,5 +7,6 @@ To crop frame images pass the following arguments separated by a whitespace. Eac
 	4. ECD value : an integer value : frame cropping will not be done for particles having ECD less than this value
 	5. Number of thumbnails to crop : an integer value : number of thumbnails generated will be less than or equal to this number
 	6. Number of thumbnails per page : an integer value : on generating first page thumbnails Flex will start loading the project
+	7. Log4j conf file path : a string representing the full path of 'log4j.conf' file
 
-Example : "F:\\MVAS_Data_Files\\528\\Records_528_Images\\" "C:\\Documents and Settings\\arvind.dathathri\\My Documents\\Brightwell\\ProjectCache\\1029485494" "Records_528_TestCrop" "5" "0" "100"
+Example : "F:\\MVAS_Data_Files\\528\\Records_528_Images\\" "C:\\Documents and Settings\\arvind.dathathri\\My Documents\\Brightwell\\ProjectCache\\1029485494" "Records_528_TestCrop" "5" "0" "100" "C:\\Documents and Settings\\arvind.dathathri\\Application Data\\BW\\Local Store\\Brightwell\\log4j.conf"
