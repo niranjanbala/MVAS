@@ -1,0 +1,26 @@
+<root>
+  <version>1.3</version>
+  <title>Records_528_1</title>
+  <createdby>arvind.dathathri</createdby>
+  <createdon>Mar:10:2011</createdon>
+  <description/>
+  <ignore-lessthan-five>false</ignore-lessthan-five>
+  <datafile>F:\MVAS_Data_Files\528\Records_528.csv</datafile>
+  <lastmodified>Thu Jan 7 2010 11:43:56 AM</lastmodified>
+  <imgresultfolder>null</imgresultfolder>
+  <projectFolder>263895416</projectFolder>
+  <saveInLocation>1</saveInLocation>
+  <density value="1.2"/>
+  <filter parameter="Records_528_1" operator="" value="" description="Records_528_1"/>
+  <subpopulation/>
+  <derivedParam/>
+  <histogram xAxis="ECD (µm)" yAxis="Particle Concentration (#/ml)" yAxisIndex="1" enabled="1" position="0"/>
+  <scatterplot xAxis="Intensity Mean" yAxis="Aspect Ratio" enabled="0" position="1"/>
+  <trendchart xAxis="Time (min)" primYAxis="Particle Count(#)" secYAxis="Particle Concentration (approx,#/ml)" primYAxisIndex="0" secYAxisIndex="1" enabled="0" position="2"/>
+  <externalAtribute>
+    <ignore_edge_particle/>
+    <hide_thumbnails_less_than_count/>
+    <project_process_only_x_particles/>
+    <project_process_only_x_thumbnails/>
+  </externalAtribute>
+</root>

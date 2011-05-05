@@ -1,0 +1,25 @@
+Version,0.0.0.2
+Sample_Name,Typical Run Mixed 
+Flow_Cell_Serial, 2222 
+Flow_Cell_Part_Number,BP-4100-FC-400-UN
+Flow_Cell_Offset,-1060
+System_Model,DPA-4100-INS-D
+System_Serial,0001
+Operator,Admin
+FileName,FileName
+Start_Date,2009/07/24 
+Start_Time,11h47m16s 
+Stop_Date,2009/07/24 
+Stop_Time,11h51m21s 
+Sample_Analyzed(ml),0.77789
+Total_Volume_Dispensed(ml),0.90033
+Volume_Dispensed_Before_Analysis(ml),0.20
+Resolution,0.25
+Images_Stored,788
+Images_Result_Folder,Records_528_Images
+Image_Format,Jpg
+Fill_Hollow,Enable
+Threshold(%),96.00
+Threshold,52864
+Table_Name(ECD),Pxl741-4_88_400U_02.tbl
+Table_Name(MFD),Pxl741-4_88_400UFL_02.tbl

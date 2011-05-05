@@ -1,0 +1,270 @@
+This is the log file for project : Records_528_1
+[Thu Mar 10 2011 03:56:35 PM 750 ms] CSV File Parser : CSV file parsing started
+[Thu Mar 10 2011 03:56:35 PM 750 ms] CSV File Parser : CSV file data opened and read successfully
+[Thu Mar 10 2011 03:56:35 PM 750 ms] CSV File Parser : CSV file data closed successfully
+[Thu Mar 10 2011 03:56:35 PM 750 ms] CSV File Parser : CSV file parsing completed
+
+[Thu Mar 10 2011 03:56:35 PM 750 ms] DB file creation started
+[Thu Mar 10 2011 03:56:35 PM 765 ms] No derivative parameters present
+[Thu Mar 10 2011 03:56:35 PM 781 ms] Import CSV arguments : 
+
+"F:\\MVAS_Data_Files\\528\\Records_528.csv"
+"C:\\Documents and Settings\\arvind.dathathri\\My Documents\\Brightwell\\ProjectCache\\263895416"
+"false"
+"0"
+"0"
+"1"
+"3"
+"18"
+"Records_528_1"
+"C:\\Documents and Settings\\arvind.dathathri\\Application Data\\BW\\Local Store\\Brightwell\\properties.conf"
+"C:\\Documents and Settings\\arvind.dathathri\\My Documents\\Brightwell\\ProjectCache\\263895416\\Records_528_1.bwp"
+"C:\\Documents and Settings\\arvind.dathathri\\Application Data\\BW\\Local Store\\Brightwell\\log4j.conf"
+
+[Thu Mar 10 2011 03:56:36 PM 375 ms] Frame cropping started
+[Thu Mar 10 2011 03:56:36 PM 375 ms] DB file creation completed in 0.010416666666666666 minutes
+[Thu Mar 10 2011 03:56:36 PM 375 ms] ConfigurationDatabaseUtil : Configuration database connection opened successfully
+[Thu Mar 10 2011 03:56:36 PM 390 ms] ConfigurationDatabaseUtil : Getting values completed with : 1 as the result length
+[Thu Mar 10 2011 03:56:36 PM 390 ms] Frame cropping arguments : 
+
+"F:\\MVAS_Data_Files\\528\\Records_528_Images\\"
+"C:\\Documents and Settings\\arvind.dathathri\\My Documents\\Brightwell\\ProjectCache\\263895416"
+"Records_528_1"
+"5"
+"0"
+"300"
+"C:\\Documents and Settings\\arvind.dathathri\\Application Data\\BW\\Local Store\\Brightwell\\log4j.conf"
+
+[Thu Mar 10 2011 03:56:37 PM 375 ms] Frame cropping completed
+[Thu Mar 10 2011 03:56:37 PM 375 ms] Frame cropping completed : Project loading started
+[Thu Mar 10 2011 03:56:37 PM 421 ms] Data Controller : org.filter::FilterControls completed : false : 1
+[Thu Mar 10 2011 03:56:37 PM 421 ms] RunTime Information Summary : Calculation of runtime information summary started
+[Thu Mar 10 2011 03:56:37 PM 421 ms] Data Controller : org.mfi.menu::MfiMenuHandler completed : false : 2
+[Thu Mar 10 2011 03:56:37 PM 421 ms] Data Controller : org.chart::CustomChartSelectionHandler completed : false : 3
+[Thu Mar 10 2011 03:56:37 PM 437 ms] Data Controller : Updation of particle collection started
+[Thu Mar 10 2011 03:56:37 PM 437 ms] Data Controller : Particle updation where clause :  WHERE (1=1) ORDER BY Frame_Number ASC, Particle_Number ASC 
+[Thu Mar 10 2011 03:56:37 PM 437 ms] RunTimeInformationSumaaryDAO : Database connection opened successfully
+[Thu Mar 10 2011 03:56:37 PM 437 ms] Histogram : Getting min-max values started
+[Thu Mar 10 2011 03:56:37 PM 437 ms] GenericUtilDAO : Getting values started : min-max values
+[Thu Mar 10 2011 03:56:37 PM 437 ms] Data Controller : scatter plot completed : false : 4
+[Thu Mar 10 2011 03:56:37 PM 453 ms] Data Controller : trend chart completed : false : 5
+[Thu Mar 10 2011 03:56:37 PM 453 ms] Frame View : onFrames Fetch
+[Thu Mar 10 2011 03:56:37 PM 453 ms] RunTimeInformationSumaaryDAO : Getting values from DB completed
+[Thu Mar 10 2011 03:56:37 PM 453 ms] RunTime Information Summary : Calculation of runtime information summary completed
+[Thu Mar 10 2011 03:56:37 PM 453 ms] Data Controller : org.rtInfo::MyRunTimeInfoPanel completed : false : 6
+[Thu Mar 10 2011 03:56:37 PM 453 ms] GenericUtilDAO : Database connection opened successfully
+[Thu Mar 10 2011 03:56:37 PM 468 ms] Data Controller: Updation of particle collection completed
+[Thu Mar 10 2011 03:56:37 PM 468 ms] Data Controller : Setting thumbnail count in the project started
+[Thu Mar 10 2011 03:56:37 PM 468 ms] Data Controller : Setting thumbnail count in the project completed with : 233 records
+[Thu Mar 10 2011 03:56:37 PM 468 ms] Particle Grid : Populating grid with main particle collection started
+[Thu Mar 10 2011 03:56:37 PM 484 ms] Particle Grid : Populating grid with main particle collection completed
+[Thu Mar 10 2011 03:56:37 PM 484 ms] Data Controller : org.datagrid::ParticleGrid completed : false : 7
+[Thu Mar 10 2011 03:56:37 PM 484 ms] Particle view : Getting first page particles started
+[Thu Mar 10 2011 03:56:37 PM 484 ms] Particle view : Getting first page particles completed : 233
+[Thu Mar 10 2011 03:56:37 PM 515 ms] GenericUtilDAO : Getting values completed with : 1 as the result length
+[Thu Mar 10 2011 03:56:37 PM 531 ms] Histogram : Getting min-max values completed
+[Thu Mar 10 2011 03:56:37 PM 531 ms] Histogram : Generating Histogram with min as : 2 and max as : 33.63
+[Thu Mar 10 2011 03:56:37 PM 531 ms] Histogram : Data series generator started
+[Thu Mar 10 2011 03:56:37 PM 531 ms] GenericUtilDAO : Database connection closed successfully
+[Thu Mar 10 2011 03:56:37 PM 531 ms] HistogramDAO : Database connection opened successfully
+[Thu Mar 10 2011 03:56:37 PM 781 ms] HistogramDAO : Getting values completed with : 528 as the result length
+[Thu Mar 10 2011 03:56:37 PM 796 ms] Histogram Data Series Generator : Getting histogram data-set from DB completed
+[Thu Mar 10 2011 03:56:37 PM 796 ms] Histogram Data Series Generator : Building particle-concentration data provider for histogram started with sample-analyzed value as : 0.77789
+[Thu Mar 10 2011 03:56:37 PM 796 ms] Histogram Data Series Generator : Building particle-count data provider for histogram started with : 528
+[Thu Mar 10 2011 03:56:37 PM 796 ms] Histogram Data Series Generator : Building particle-count data provider for histogram completed with : 43 bars and 528 records
+[Thu Mar 10 2011 03:56:37 PM 796 ms] Histogram Data Series Generator : Dispatching histogram data series generation event
+[Thu Mar 10 2011 03:56:37 PM 796 ms] Histogram : Data series generator completed
+[Thu Mar 10 2011 03:56:37 PM 796 ms] Histogram : Setting Histogram collection as chart data provider started
+[Thu Mar 10 2011 03:56:37 PM 812 ms] Histogram Data Series Generator : Building particle-concentration data provider for histogram completed
+[Thu Mar 10 2011 03:56:37 PM 812 ms] HistogramDAO : Database connection closed successfully
+[Thu Mar 10 2011 03:56:37 PM 812 ms] Histogram : Setting Histogram collection as chart data provider completed
+[Thu Mar 10 2011 03:56:37 PM 812 ms] Data Controller : histogram chart completed : true : 0
+[Thu Mar 10 2011 03:56:37 PM 812 ms] Data Controller : progress bar isRemoveCursor is true : removing progress bar started
+[Thu Mar 10 2011 03:56:38 PM 187 ms] Data Controller : progress bar timer completed
+[Thu Mar 10 2011 03:56:38 PM 187 ms] Data Controller : progress bar is removed
+
+[Thu Mar 10 2011 03:56:39 PM 796 ms] Histogram: Zooming on chart with 4 selected bars
+[Thu Mar 10 2011 03:56:39 PM 796 ms] Histogram : Notifying data controller
+[Thu Mar 10 2011 03:56:39 PM 796 ms] Data Controller : org.filter::FilterControls completed : false : 1
+[Thu Mar 10 2011 03:56:39 PM 796 ms] RunTime Information Summary : Calculation of runtime information summary started
+[Thu Mar 10 2011 03:56:39 PM 796 ms] Data Controller : org.mfi.menu::MfiMenuHandler completed : false : 2
+[Thu Mar 10 2011 03:56:39 PM 796 ms] Data Controller : org.chart::CustomChartSelectionHandler completed : false : 3
+[Thu Mar 10 2011 03:56:39 PM 796 ms] Histogram : Applying filter condition to Histogram
+[Thu Mar 10 2011 03:56:39 PM 812 ms] Histogram : Data series generator started
+[Thu Mar 10 2011 03:56:39 PM 812 ms] Data Controller : scatter plot completed : false : 4
+[Thu Mar 10 2011 03:56:39 PM 812 ms] Data Controller : trend chart completed : false : 5
+[Thu Mar 10 2011 03:56:39 PM 812 ms] Data Controller : Updation of particle collection started
+[Thu Mar 10 2011 03:56:39 PM 812 ms] Data Controller : Particle updation where clause :  WHERE (1=1) AND (ECD >= 5 AND ECD <= 8) ORDER BY Frame_Number ASC, Particle_Number ASC 
+[Thu Mar 10 2011 03:56:40 PM 93 ms] Frame View : onFrames Fetch
+[Thu Mar 10 2011 03:56:40 PM 93 ms] RunTimeInformationSumaaryDAO : Database connection opened successfully
+[Thu Mar 10 2011 03:56:40 PM 93 ms] HistogramDAO : Database connection opened successfully
+[Thu Mar 10 2011 03:56:40 PM 109 ms] Data Controller: Updation of particle collection completed
+[Thu Mar 10 2011 03:56:40 PM 109 ms] Data Controller : Setting thumbnail count in the project started
+[Thu Mar 10 2011 03:56:40 PM 109 ms] Data Controller : Setting thumbnail count in the project completed with : 85 records
+[Thu Mar 10 2011 03:56:40 PM 109 ms] Particle Grid : Populating grid with main particle collection started
+[Thu Mar 10 2011 03:56:40 PM 109 ms] Particle Grid : Populating grid with main particle collection completed
+[Thu Mar 10 2011 03:56:40 PM 109 ms] Data Controller : org.datagrid::ParticleGrid completed : false : 6
+[Thu Mar 10 2011 03:56:40 PM 109 ms] Particle view : Getting first page particles started
+[Thu Mar 10 2011 03:56:40 PM 109 ms] Particle view : Getting first page particles completed : 85
+[Thu Mar 10 2011 03:56:40 PM 156 ms] RunTimeInformationSumaaryDAO : Getting values from DB completed
+[Thu Mar 10 2011 03:56:40 PM 156 ms] RunTime Information Summary : Calculation of runtime information summary completed
+[Thu Mar 10 2011 03:56:40 PM 156 ms] Data Controller : org.rtInfo::MyRunTimeInfoPanel completed : false : 7
+[Thu Mar 10 2011 03:56:40 PM 156 ms] HistogramDAO : Getting values completed with : 85 as the result length
+[Thu Mar 10 2011 03:56:40 PM 156 ms] Histogram Data Series Generator : Getting histogram data-set from DB completed
+[Thu Mar 10 2011 03:56:40 PM 156 ms] Histogram Data Series Generator : Building particle-concentration data provider for histogram started with sample-analyzed value as : 0.77789
+[Thu Mar 10 2011 03:56:40 PM 156 ms] Histogram Data Series Generator : Building particle-count data provider for histogram started with : 85
+[Thu Mar 10 2011 03:56:40 PM 156 ms] Histogram Data Series Generator : Building particle-count data provider for histogram completed with : 12 bars and 85 records
+[Thu Mar 10 2011 03:56:40 PM 156 ms] Histogram Data Series Generator : Dispatching histogram data series generation event
+[Thu Mar 10 2011 03:56:40 PM 156 ms] Histogram : Data series generator completed
+[Thu Mar 10 2011 03:56:40 PM 156 ms] Histogram : Setting Histogram collection as chart data provider started
+[Thu Mar 10 2011 03:56:40 PM 156 ms] Histogram Data Series Generator : Building particle-concentration data provider for histogram completed
+[Thu Mar 10 2011 03:56:40 PM 156 ms] HistogramDAO : Database connection closed successfully
+[Thu Mar 10 2011 03:56:40 PM 234 ms] Histogram : Setting Histogram collection as chart data provider completed
+[Thu Mar 10 2011 03:56:40 PM 234 ms] Data Controller : histogram chart completed : true : 0
+[Thu Mar 10 2011 03:56:40 PM 250 ms] Data Controller : progress bar isRemoveCursor is true : removing progress bar started
+[Thu Mar 10 2011 03:56:40 PM 765 ms] Data Controller : progress bar timer completed
+[Thu Mar 10 2011 03:56:40 PM 765 ms] Data Controller : progress bar is removed
+
+[Thu Mar 10 2011 03:56:43 PM 750 ms] Charts : Reset zoom operation from charts started
+[Thu Mar 10 2011 03:56:43 PM 750 ms] Data Controller : org.filter::FilterControls completed : false : 1
+[Thu Mar 10 2011 03:56:43 PM 750 ms] RunTime Information Summary : Calculation of runtime information summary started
+[Thu Mar 10 2011 03:56:43 PM 750 ms] Data Controller : org.mfi.menu::MfiMenuHandler completed : false : 2
+[Thu Mar 10 2011 03:56:43 PM 750 ms] Data Controller : org.chart::CustomChartSelectionHandler completed : false : 3
+[Thu Mar 10 2011 03:56:43 PM 750 ms] Histogram : Applying filter condition to Histogram
+[Thu Mar 10 2011 03:56:43 PM 765 ms] Histogram : Getting min-max values started
+[Thu Mar 10 2011 03:56:43 PM 765 ms] GenericUtilDAO : Getting values started : min-max values
+[Thu Mar 10 2011 03:56:43 PM 765 ms] Data Controller : scatter plot completed : false : 4
+[Thu Mar 10 2011 03:56:43 PM 765 ms] Data Controller : trend chart completed : false : 5
+[Thu Mar 10 2011 03:56:43 PM 765 ms] Data Controller : Updation of particle collection started
+[Thu Mar 10 2011 03:56:43 PM 765 ms] Data Controller : Particle updation where clause :  WHERE (1=1) ORDER BY Frame_Number ASC, Particle_Number ASC 
+[Thu Mar 10 2011 03:56:43 PM 765 ms] Frame View : onFrames Fetch
+[Thu Mar 10 2011 03:56:43 PM 765 ms] RunTimeInformationSumaaryDAO : Database connection opened successfully
+[Thu Mar 10 2011 03:56:43 PM 765 ms] GenericUtilDAO : Database connection opened successfully
+[Thu Mar 10 2011 03:56:43 PM 859 ms] GenericUtilDAO : Getting values completed with : 1 as the result length
+[Thu Mar 10 2011 03:56:43 PM 859 ms] Histogram : Getting min-max values completed
+[Thu Mar 10 2011 03:56:43 PM 859 ms] Histogram : Generating Histogram with min as : 2 and max as : 33.63
+[Thu Mar 10 2011 03:56:43 PM 859 ms] Histogram : Data series generator started
+[Thu Mar 10 2011 03:56:43 PM 859 ms] RunTimeInformationSumaaryDAO : Getting values from DB completed
+[Thu Mar 10 2011 03:56:43 PM 859 ms] RunTime Information Summary : Calculation of runtime information summary completed
+[Thu Mar 10 2011 03:56:43 PM 859 ms] Data Controller : org.rtInfo::MyRunTimeInfoPanel completed : false : 6
+[Thu Mar 10 2011 03:56:43 PM 875 ms] Data Controller: Updation of particle collection completed
+[Thu Mar 10 2011 03:56:43 PM 875 ms] Data Controller : Setting thumbnail count in the project started
+[Thu Mar 10 2011 03:56:43 PM 875 ms] Data Controller : Setting thumbnail count in the project completed with : 233 records
+[Thu Mar 10 2011 03:56:43 PM 875 ms] Particle Grid : Populating grid with main particle collection started
+[Thu Mar 10 2011 03:56:43 PM 875 ms] Particle Grid : Populating grid with main particle collection completed
+[Thu Mar 10 2011 03:56:43 PM 875 ms] Data Controller : org.datagrid::ParticleGrid completed : false : 7
+[Thu Mar 10 2011 03:56:43 PM 875 ms] Particle view : Getting first page particles started
+[Thu Mar 10 2011 03:56:43 PM 875 ms] Particle view : Getting first page particles completed : 233
+[Thu Mar 10 2011 03:56:43 PM 937 ms] GenericUtilDAO : Database connection closed successfully
+[Thu Mar 10 2011 03:56:43 PM 937 ms] HistogramDAO : Database connection opened successfully
+[Thu Mar 10 2011 03:56:44 PM 468 ms] HistogramDAO : Getting values completed with : 528 as the result length
+[Thu Mar 10 2011 03:56:44 PM 468 ms] Histogram Data Series Generator : Getting histogram data-set from DB completed
+[Thu Mar 10 2011 03:56:44 PM 468 ms] Histogram Data Series Generator : Building particle-concentration data provider for histogram started with sample-analyzed value as : 0.77789
+[Thu Mar 10 2011 03:56:44 PM 468 ms] Histogram Data Series Generator : Building particle-count data provider for histogram started with : 528
+[Thu Mar 10 2011 03:56:44 PM 468 ms] Histogram Data Series Generator : Building particle-count data provider for histogram completed with : 43 bars and 528 records
+[Thu Mar 10 2011 03:56:44 PM 468 ms] Histogram Data Series Generator : Dispatching histogram data series generation event
+[Thu Mar 10 2011 03:56:44 PM 468 ms] Histogram : Data series generator completed
+[Thu Mar 10 2011 03:56:44 PM 468 ms] Histogram : Setting Histogram collection as chart data provider started
+[Thu Mar 10 2011 03:56:44 PM 468 ms] Histogram Data Series Generator : Building particle-concentration data provider for histogram completed
+[Thu Mar 10 2011 03:56:44 PM 468 ms] HistogramDAO : Database connection closed successfully
+[Thu Mar 10 2011 03:56:44 PM 687 ms] Histogram : Setting Histogram collection as chart data provider completed
+[Thu Mar 10 2011 03:56:44 PM 703 ms] Data Controller : histogram chart completed : true : 0
+[Thu Mar 10 2011 03:56:44 PM 703 ms] Data Controller : progress bar isRemoveCursor is true : removing progress bar started
+[Thu Mar 10 2011 03:56:45 PM 109 ms] Data Controller : progress bar timer completed
+[Thu Mar 10 2011 03:56:45 PM 109 ms] Data Controller : progress bar is removed
+
+[Thu Mar 10 2011 04:08:14 PM 46 ms] This is the log file for project : Records_528_1
+
+[Thu Mar 10 2011 04:08:14 PM 312 ms] Data Controller : org.filter::FilterControls completed : false : 1
+[Thu Mar 10 2011 04:08:14 PM 312 ms] RunTime Information Summary : Calculation of runtime information summary started
+[Thu Mar 10 2011 04:08:14 PM 312 ms] Data Controller : org.mfi.menu::MfiMenuHandler completed : false : 2
+[Thu Mar 10 2011 04:08:14 PM 312 ms] Data Controller : org.chart::CustomChartSelectionHandler completed : false : 3
+[Thu Mar 10 2011 04:08:14 PM 562 ms] Data Controller : Updation of particle collection started
+[Thu Mar 10 2011 04:08:14 PM 578 ms] Data Controller : Particle updation where clause :  WHERE (1=1) ORDER BY Frame_Number ASC, Particle_Number ASC 
+[Thu Mar 10 2011 04:08:14 PM 578 ms] RunTimeInformationSumaaryDAO : Database connection opened successfully
+[Thu Mar 10 2011 04:08:14 PM 578 ms] Histogram : Getting min-max values started
+[Thu Mar 10 2011 04:08:14 PM 593 ms] GenericUtilDAO : Getting values started : min-max values
+[Thu Mar 10 2011 04:08:14 PM 703 ms] Data Controller : scatter plot completed : false : 4
+[Thu Mar 10 2011 04:08:14 PM 703 ms] Data Controller : trend chart completed : false : 5
+[Thu Mar 10 2011 04:08:14 PM 703 ms] Frame View : onFrames Fetch
+[Thu Mar 10 2011 04:08:14 PM 718 ms] RunTimeInformationSumaaryDAO : Getting values from DB completed
+[Thu Mar 10 2011 04:08:14 PM 718 ms] RunTime Information Summary : Calculation of runtime information summary completed
+[Thu Mar 10 2011 04:08:14 PM 718 ms] Data Controller : org.rtInfo::MyRunTimeInfoPanel completed : false : 6
+[Thu Mar 10 2011 04:08:14 PM 734 ms] GenericUtilDAO : Database connection opened successfully
+[Thu Mar 10 2011 04:08:14 PM 734 ms] Data Controller: Updation of particle collection completed
+[Thu Mar 10 2011 04:08:14 PM 734 ms] Data Controller : Setting thumbnail count in the project started
+[Thu Mar 10 2011 04:08:14 PM 734 ms] Data Controller : Setting thumbnail count in the project completed with : 233 records
+[Thu Mar 10 2011 04:08:14 PM 734 ms] Particle Grid : Populating grid with main particle collection started
+[Thu Mar 10 2011 04:08:14 PM 734 ms] Particle Grid : Populating grid with main particle collection completed
+[Thu Mar 10 2011 04:08:14 PM 734 ms] Data Controller : org.datagrid::ParticleGrid completed : false : 7
+[Thu Mar 10 2011 04:08:14 PM 750 ms] Particle view : Getting first page particles started
+[Thu Mar 10 2011 04:08:14 PM 750 ms] Particle view : Getting first page particles completed : 233
+[Thu Mar 10 2011 04:08:14 PM 796 ms] GenericUtilDAO : Getting values completed with : 1 as the result length
+[Thu Mar 10 2011 04:08:14 PM 796 ms] Histogram : Getting min-max values completed
+[Thu Mar 10 2011 04:08:14 PM 796 ms] Histogram : Generating Histogram with min as : 2 and max as : 33.63
+[Thu Mar 10 2011 04:08:14 PM 796 ms] Histogram : Data series generator started
+[Thu Mar 10 2011 04:08:14 PM 796 ms] GenericUtilDAO : Database connection closed successfully
+[Thu Mar 10 2011 04:08:14 PM 796 ms] HistogramDAO : Database connection opened successfully
+[Thu Mar 10 2011 04:08:15 PM 296 ms] HistogramDAO : Getting values completed with : 528 as the result length
+[Thu Mar 10 2011 04:08:15 PM 312 ms] Histogram Data Series Generator : Getting histogram data-set from DB completed
+[Thu Mar 10 2011 04:08:15 PM 312 ms] Histogram Data Series Generator : Building particle-concentration data provider for histogram started with sample-analyzed value as : 0.77789
+[Thu Mar 10 2011 04:08:15 PM 312 ms] Histogram Data Series Generator : Building particle-count data provider for histogram started with : 528
+[Thu Mar 10 2011 04:08:15 PM 312 ms] Histogram Data Series Generator : Building particle-count data provider for histogram completed with : 43 bars and 528 records
+[Thu Mar 10 2011 04:08:15 PM 312 ms] Histogram Data Series Generator : Dispatching histogram data series generation event
+[Thu Mar 10 2011 04:08:15 PM 312 ms] Histogram : Data series generator completed
+[Thu Mar 10 2011 04:08:15 PM 312 ms] Histogram : Setting Histogram collection as chart data provider started
+[Thu Mar 10 2011 04:08:15 PM 328 ms] Histogram Data Series Generator : Building particle-concentration data provider for histogram completed
+[Thu Mar 10 2011 04:08:15 PM 453 ms] Histogram : Setting Histogram collection as chart data provider completed
+[Thu Mar 10 2011 04:08:15 PM 453 ms] Data Controller : histogram chart completed : true : 0
+[Thu Mar 10 2011 04:08:15 PM 468 ms] Data Controller : progress bar isRemoveCursor is true : removing progress bar started
+[Thu Mar 10 2011 04:08:16 PM 234 ms] HistogramDAO : Database connection closed successfully
+[Thu Mar 10 2011 04:08:16 PM 312 ms] Data Controller : progress bar timer completed
+[Thu Mar 10 2011 04:08:16 PM 312 ms] Data Controller : progress bar is removed
+
+[Thu Mar 10 2011 04:32:16 PM 750 ms] This is the log file for project : Records_528_1
+
+[Thu Mar 10 2011 04:32:17 PM 15 ms] Data Controller : org.filter::FilterControls completed : false : 1
+[Thu Mar 10 2011 04:32:17 PM 15 ms] RunTime Information Summary : Calculation of runtime information summary started
+[Thu Mar 10 2011 04:32:17 PM 31 ms] Data Controller : org.mfi.menu::MfiMenuHandler completed : false : 2
+[Thu Mar 10 2011 04:32:17 PM 31 ms] Data Controller : org.chart::CustomChartSelectionHandler completed : false : 3
+[Thu Mar 10 2011 04:32:17 PM 343 ms] Data Controller : Updation of particle collection started
+[Thu Mar 10 2011 04:32:17 PM 343 ms] Data Controller : Particle updation where clause :  WHERE (1=1) ORDER BY Frame_Number ASC, Particle_Number ASC 
+[Thu Mar 10 2011 04:32:17 PM 343 ms] RunTimeInformationSumaaryDAO : Database connection opened successfully
+[Thu Mar 10 2011 04:32:17 PM 359 ms] Histogram : Getting min-max values started
+[Thu Mar 10 2011 04:32:17 PM 359 ms] GenericUtilDAO : Getting values started : min-max values
+[Thu Mar 10 2011 04:32:17 PM 562 ms] Data Controller : scatter plot completed : false : 4
+[Thu Mar 10 2011 04:32:17 PM 562 ms] Data Controller : trend chart completed : false : 5
+[Thu Mar 10 2011 04:32:17 PM 562 ms] Frame View : onFrames Fetch
+[Thu Mar 10 2011 04:32:17 PM 562 ms] RunTimeInformationSumaaryDAO : Getting values from DB completed
+[Thu Mar 10 2011 04:32:17 PM 562 ms] RunTime Information Summary : Calculation of runtime information summary completed
+[Thu Mar 10 2011 04:32:17 PM 562 ms] Data Controller : org.rtInfo::MyRunTimeInfoPanel completed : false : 6
+[Thu Mar 10 2011 04:32:17 PM 687 ms] GenericUtilDAO : Database connection opened successfully
+[Thu Mar 10 2011 04:32:17 PM 703 ms] Data Controller: Updation of particle collection completed
+[Thu Mar 10 2011 04:32:17 PM 703 ms] Data Controller : Setting thumbnail count in the project started
+[Thu Mar 10 2011 04:32:17 PM 703 ms] Data Controller : Setting thumbnail count in the project completed with : 233 records
+[Thu Mar 10 2011 04:32:17 PM 703 ms] Particle Grid : Populating grid with main particle collection started
+[Thu Mar 10 2011 04:32:17 PM 703 ms] Particle Grid : Populating grid with main particle collection completed
+[Thu Mar 10 2011 04:32:17 PM 703 ms] Data Controller : org.datagrid::ParticleGrid completed : false : 7
+[Thu Mar 10 2011 04:32:17 PM 718 ms] Particle view : Getting first page particles started
+[Thu Mar 10 2011 04:32:17 PM 718 ms] Particle view : Getting first page particles completed : 233
+[Thu Mar 10 2011 04:32:18 PM 234 ms] GenericUtilDAO : Getting values completed with : 1 as the result length
+[Thu Mar 10 2011 04:32:18 PM 234 ms] Histogram : Getting min-max values completed
+[Thu Mar 10 2011 04:32:18 PM 234 ms] Histogram : Generating Histogram with min as : 2 and max as : 33.63
+[Thu Mar 10 2011 04:32:18 PM 234 ms] Histogram : Data series generator started
+[Thu Mar 10 2011 04:32:18 PM 234 ms] GenericUtilDAO : Database connection closed successfully
+[Thu Mar 10 2011 04:32:18 PM 234 ms] HistogramDAO : Database connection opened successfully
+[Thu Mar 10 2011 04:32:19 PM 156 ms] HistogramDAO : Getting values completed with : 528 as the result length
+[Thu Mar 10 2011 04:32:19 PM 156 ms] Histogram Data Series Generator : Getting histogram data-set from DB completed
+[Thu Mar 10 2011 04:32:19 PM 156 ms] Histogram Data Series Generator : Building particle-concentration data provider for histogram started with sample-analyzed value as : 0.77789
+[Thu Mar 10 2011 04:32:19 PM 156 ms] Histogram Data Series Generator : Building particle-count data provider for histogram started with : 528
+[Thu Mar 10 2011 04:32:19 PM 156 ms] Histogram Data Series Generator : Building particle-count data provider for histogram completed with : 43 bars and 528 records
+[Thu Mar 10 2011 04:32:19 PM 156 ms] Histogram Data Series Generator : Dispatching histogram data series generation event
+[Thu Mar 10 2011 04:32:19 PM 156 ms] Histogram : Data series generator completed
+[Thu Mar 10 2011 04:32:19 PM 156 ms] Histogram : Setting Histogram collection as chart data provider started
+[Thu Mar 10 2011 04:32:19 PM 171 ms] Histogram Data Series Generator : Building particle-concentration data provider for histogram completed
+[Thu Mar 10 2011 04:32:19 PM 281 ms] Histogram : Setting Histogram collection as chart data provider completed
+[Thu Mar 10 2011 04:32:19 PM 281 ms] Data Controller : histogram chart completed : true : 0
+[Thu Mar 10 2011 04:32:19 PM 281 ms] Data Controller : progress bar isRemoveCursor is true : removing progress bar started
+[Thu Mar 10 2011 04:32:19 PM 343 ms] HistogramDAO : Database connection closed successfully
+[Thu Mar 10 2011 04:32:19 PM 484 ms] Data Controller : progress bar timer completed
+[Thu Mar 10 2011 04:32:19 PM 484 ms] Data Controller : progress bar is removed
